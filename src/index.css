@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'DM Serif Display';
+  src: url(./Assets/Fonts/DMSerifDisplay-Regular.woff2);
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: url(./Assets/Fonts/OpenSans-VariableFont.woff2);
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url(./Assets/Fonts/InterVariable.woff2);
+}
+
 * {
   scroll-behavior: smooth;
 }
@@ -9,8 +24,17 @@
 body {
   padding: 0px;
   margin: 0px;
+  font-family: 'Inter';
 }
 
 title {
   text-transform: capitalize;
+}
+
+.img-contains {
+  object-fit: contain;
+}
+
+.img-cover {
+  object-fit: cover;
 }
