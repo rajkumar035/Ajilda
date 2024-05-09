@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import React from 'react';
 import { useStyles } from './styles';
 import HomeBg from '../../Assets/Images/Home.jfif';
@@ -12,7 +12,6 @@ import Results from '../../Assets/Icons/results.png';
 import ProductCard from '../../components/ProductCard';
 import CategoryCards from './components/CategoryCards';
 import Better from "../../Assets/PNG's/better.png";
-import staticBg from "../../Assets/PNG's/SttaicBG.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -21,10 +20,8 @@ import PublicSharpIcon from '@mui/icons-material/PublicSharp';
 import { FaFacebookF } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
-import ContactBg from "../../Assets/PNG's/ContactBg.png";
 import logo from "../../Assets/PNG's/logo.png";
 import { useNavigate } from 'react-router-dom';
-import { styled } from '@mui/styles';
 
 const Home = () => {
   const classes = useStyles();
