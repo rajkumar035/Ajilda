@@ -1,6 +1,5 @@
 import { makeStyles } from '@mui/styles';
 import staticBg from "../../Assets/PNG's/SttaicBG.png";
-import ContactBg from "../../Assets/PNG's/ContactBg.png";
 
 export const useStyles = makeStyles((theme) => ({
   homeBanner: {
@@ -110,50 +109,6 @@ export const useStyles = makeStyles((theme) => ({
     color: '#fff !important',
     textAlign: 'center !important',
     zIndex: '1 !important',
-  },
-  contactBgStyles: {
-    width: '100%',
-    background: `url(${ContactBg})`,
-  },
-  contactBgLayout: {
-    background: 'rgba(246, 242, 234, 0.7) !important',
-    padding: '84px 0px',
-  },
-  contactLayout: {
-    width: '60%',
-    gap: '72px',
-    margin: '0px auto',
-  },
-  contactHeading: {
-    fontSize: '50px !important',
-    fontWeight: '400 !important',
-    color: '#292F36 !important',
-    fontFamily: 'DM Serif Display !important',
-    textAlign: 'center !important',
-  },
-  contactLeftContainer: {
-    justifyContent: 'space-between',
-    background: '#D6C19D',
-    borderRadius: '24px',
-    height: '100%',
-  },
-  contactIcon: {
-    height: '24px',
-    width: 'auto',
-    color: '#B89354',
-    background: '#FFFFFF',
-    padding: '14px',
-    borderRadius: '50%',
-  },
-  logoStyles: {
-    height: '50px',
-    width: 'auto',
-    marginBottom: '90px',
-  },
-  seperator: {
-    height: '16px',
-    width: '1px',
-    background: '#424C23',
   },
   categoryCardContainer: {
     width: '100%',
