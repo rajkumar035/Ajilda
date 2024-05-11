@@ -68,12 +68,12 @@
     },
     "WhyShouldBuy": {
       "0": {
-        "img": "img url",
+        "img": "https://media.istockphoto.com/id/1332091397/photo/woman-applying-moisturizer-on-face-for-skin-imperfection-and-wrinkles.jpg?s=612x612&w=0&k=20&c=iFwzkbtxL7--FPRZBRjSOq6W1ocTfh4lgAl-g1jl-Z8=",
         "title": "Reduce dark spot",
         "description": "Lorem ipsum dolor sit amet consectetur. Sit volutpat accumsan in morbi rhoncus."
       },
       "1": {
-        "img": "img url",
+        "img": "https://www.shutterstock.com/image-photo/attractive-young-adult-woman-apply-600nw-1562062876.jpg",
         "title": "Reduce dark spot",
         "description": "Lorem ipsum dolor sit amet consectetur. Sit volutpat accumsan in morbi rhoncus."
       }
