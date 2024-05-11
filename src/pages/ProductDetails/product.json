@@ -1,0 +1,85 @@
+{
+    "id": "76bh65",
+    "product": {
+      "name":"Night Cream",
+      "image": {
+        "0": "https://images-static.nykaa.com/media/catalog/product/9/7/974cba4CGGCO00000075_3.jpg?tr=w-500",
+        "1": "https://www.minifeel.in/cdn/shop/files/Packof12mcaffeinecombo.jpg?v=1694676383&width=533",
+        "2": "https://m.media-amazon.com/images/I/41vmTwzLv3L._SL500_.jpg",
+        "3": "https://rukminim2.flixcart.com/image/750/900/xif0q/anti-ageing/n/a/x/12-cell-renewal-serum-for-face-sample-serum-for-men-women-12-ml-original-imagsy6pz9g3xgkj.jpeg?q=20&crop=false"
+      },
+      "tags": [
+        "100ml",
+        "Puffy eyes",
+        "Expression lines"
+      ],
+      "combo": [
+        "Facewash 100 gm",
+        "Toner 50ml",
+        "Sunscreen 150 gm",
+        "Under eye cream 50gm"
+      ],
+      "price": {
+        "newprice": 299,
+        "oldprice": 899
+      },
+      "description": "Night cream soothes and calms the skin as you sleep, reducing any redness and irritation overnight. By supporting the skin's natural regenerative processes while you're sleeping.",
+      "highlight": {
+        "0": "Medical silicone patches for everlasting use",
+        "1": "Reusable eye patches intensify serum effects",
+        "2": "Promotes absorption for a youthful, lifted look"
+      }
+    },
+    "whenToUse": {
+      "description": "Night cream soothes and calms the skin as you sleep, reducing any redness and irritation overnight.",
+      "tag": "Night Cream"
+    },
+    "keyIngredients": {
+      "0": {
+        "imag": "https://i.pinimg.com/736x/4e/93/04/4e9304e91575b927c577256200543f14.jpg",
+        "name": "Why thulsi?",
+        "description": "Lorem ipsum dolor sit amet consectetur. Id sed in etiam a. Enim nulla sodales proin porta etiam viverra arcu."
+      },
+      "1": {
+        "imag": "https://www.pngmart.com/files/22/Saffron-PNG-Photo.png",
+        "name": "Why saffron?",
+        "description": "Lorem ipsum dolor sit amet consectetur. Id sed in etiam a. Enim nulla sodales proin porta etiam viverra arcu."
+      },
+      "3": {
+        "imag": "https://banner2.cleanpng.com/20190704/ztb/kisspng-clove-portable-network-graphics-transparency-clip-download-clove-essential-oil-clove-png-png-image-5d1e8c118eb832.1147114815622830255846.jpg",
+        "name": "Why clove?",
+        "description": "Lorem ipsum dolor sit amet consectetur. Id sed in etiam a. Enim nulla sodales proin porta etiam viverra arcu."
+      },
+      "4": {
+        "imag": "https://www.pngmart.com/files/22/Saffron-PNG-Photo.png",
+        "name": "Why saffron?",
+        "description": "Lorem ipsum dolor sit amet consectetur. Id sed in etiam a. Enim nulla sodales proin porta etiam viverra arcu."
+      },
+      "5": {
+        "imag": "https://banner2.cleanpng.com/20190704/ztb/kisspng-clove-portable-network-graphics-transparency-clip-download-clove-essential-oil-clove-png-png-image-5d1e8c118eb832.1147114815622830255846.jpg",
+        "name": "Why clove?",
+        "description": "Lorem ipsum dolor sit amet consectetur. Id sed in etiam a. Enim nulla sodales proin porta etiam viverra arcu."
+      },
+      "6": {
+        "imag": "https://i.pinimg.com/736x/4e/93/04/4e9304e91575b927c577256200543f14.jpg",
+        "name": "Why thulsi?",
+        "description": "Lorem ipsum dolor sit amet consectetur. Id sed in etiam a. Enim nulla sodales proin porta etiam viverra arcu."
+      }
+    },
+    "WhyShouldBuy": {
+      "0": {
+        "img": "img url",
+        "title": "Reduce dark spot",
+        "description": "Lorem ipsum dolor sit amet consectetur. Sit volutpat accumsan in morbi rhoncus."
+      },
+      "1": {
+        "img": "img url",
+        "title": "Reduce dark spot",
+        "description": "Lorem ipsum dolor sit amet consectetur. Sit volutpat accumsan in morbi rhoncus."
+      }
+    },
+    "Rated": {
+      "0": "img-url1",
+      "1": "img-url2"
+    }
+  }
