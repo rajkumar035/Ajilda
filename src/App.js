@@ -6,6 +6,9 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { ErrorBoundary as ErrorBoundarySuspense } from 'react-error-boundary';
 import { getTabText } from './utils/helperFunctions';
 import ReactThemeProvider from './context/ThemeProvider';
+import { Box } from '@mui/material';
+import Header from './components/Header';
+import GoogleAuthProvider from './context/GoogleAuthProvider';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
@@ -35,25 +38,30 @@ function App() {
       }}
       FallbackComponent={<ErrorBoundary />}>
       <ReactThemeProvider>
-        <React.Suspense fallback={<Loader />}>
+        <GoogleAuthProvider>
           <BrowserRouter>
-            <Routes>
-              <Route caseSensitive path={routes.home} index element={<Home />} />
-              <Route caseSensitive path={routes.about} element={<About />} />
-              <Route caseSensitive path={routes.faq} element={<Faq />} />
-              <Route caseSensitive path={routes.product} element={<Products />} />
-              <Route caseSensitive path={`/${routes.productDetails}/:product_id`} element={<ProductDetails />} />
-              <Route caseSensitive path={routes.cart} element={<Cart />} />
-              <Route caseSensitive path={routes.checkout} element={<Checkout />} />
-              <Route caseSensitive path={routes.profile} element={<MyProfile />} />
-              <Route caseSensitive path={routes.orders} element={<MyOrders />} />
-              <Route caseSensitive path={`/${routes.orderDetails}/:order_id`} element={<OrderDetails />} />
-              <Route caseSensitive path={routes.response} element={<Response />} />
-              <Route caseSensitive path={routes.notFound} element={<NotFound />} />
-              <Route />
-            </Routes>
+            <Box component={'article'}>
+              <Header />
+              <React.Suspense fallback={<Loader />}>
+                <Routes>
+                  <Route caseSensitive path={routes.home} index element={<Home />} />
+                  <Route caseSensitive path={routes.about} element={<About />} />
+                  <Route caseSensitive path={routes.faq} element={<Faq />} />
+                  <Route caseSensitive path={routes.product} element={<Products />} />
+                  <Route caseSensitive path={`/${routes.productDetails}/:product_id`} element={<ProductDetails />} />
+                  <Route caseSensitive path={routes.cart} element={<Cart />} />
+                  <Route caseSensitive path={routes.checkout} element={<Checkout />} />
+                  <Route caseSensitive path={routes.profile} element={<MyProfile />} />
+                  <Route caseSensitive path={routes.orders} element={<MyOrders />} />
+                  <Route caseSensitive path={`/${routes.orderDetails}/:order_id`} element={<OrderDetails />} />
+                  <Route caseSensitive path={routes.response} element={<Response />} />
+                  <Route caseSensitive path={routes.notFound} element={<NotFound />} />
+                  <Route />
+                </Routes>
+              </React.Suspense>
+            </Box>
           </BrowserRouter>
-        </React.Suspense>
+        </GoogleAuthProvider>
       </ReactThemeProvider>
     </ErrorBoundarySuspense>
   );

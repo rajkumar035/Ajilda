@@ -7,17 +7,13 @@ import whatweoffer from "../../Assets/PNG's/whatweoffer.png";
 import soldBanner from "../../Assets/PNG's/soldBanner.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import Footer from '../../components/Footer';
-import Header from '../../components/Header';
 import Contact from '../Contact';
 
 const About = () => {
   const classes = useStyles();
 
   return (
-    <Box component={'article'}>
-      {/* Header */}
-      <Header />
-
+    <>
       {/* Home */}
       <Box component={'section'} position={'relative'} boxShadow={'inset 28rem -1rem 20rem -3rem rgba(0, 0, 0, 0.8)'}>
         <Box component={'img'} src={HomeBg} className={classes.homeBanner} />
@@ -31,7 +27,7 @@ const About = () => {
                 Lorem ipsum dolor sit amet consectetur. Id ultrices lacus quam malesuada scelerisque iaculis lacus. Faucibus semper lacus lorem euismod nulla lorem est. Pellentesque ipsum ac scelerisque laoreet consequat. Amet risus volutpat sapien.
               </Typography>
             </Box>
-            <Button variant='contained' color='primary' sx={{ maxWidth: '260px' }} endIcon={<ArrowForwardIcon />}>
+            <Button variant='contained' color='primary' sx={{ maxWidth: '280px' }} endIcon={<ArrowForwardIcon />}>
               Explore our products
             </Button>
           </Box>
@@ -114,7 +110,7 @@ const About = () => {
 
       {/* Footer */}
       <Footer />
-    </Box>
+    </>
   );
 };
 

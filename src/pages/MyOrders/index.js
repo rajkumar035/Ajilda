@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useStyles } from './styles';
 import { Box, Tab, Tabs } from '@mui/material';
 import OrderCards from './components/OrderCards';
+import { useStyles } from './styles';
 
 export const tabStateLabel = {
   0: 'Active',

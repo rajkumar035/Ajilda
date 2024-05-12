@@ -43,3 +43,7 @@ title {
   font-size: 16px !important;
   min-width: 120px !important;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}

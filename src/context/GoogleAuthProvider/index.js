@@ -1,7 +1,7 @@
 import React from 'react';
 
-const GoogleAuthProvider = () => {
-  return <div>GoogleAuthProvider</div>;
+const GoogleAuthProvider = ({ children }) => {
+  return <div>{children}</div>;
 };
 
 export default GoogleAuthProvider;

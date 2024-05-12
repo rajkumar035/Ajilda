@@ -16,16 +16,12 @@ import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
 import Contact from '../Contact';
 import Footer from '../../components/Footer';
-import Header from '../../components/Header';
 
 const Home = () => {
   const classes = useStyles();
 
   return (
-    <Box component={'article'}>
-      {/* Header */}
-      <Header />
-
+    <>
       {/* Home */}
       <Box component={'section'} position={'relative'} boxShadow={'inset 28rem -1rem 20rem -3rem rgba(0, 0, 0, 0.8)'}>
         <Box component={'img'} src={HomeBg} className={classes.homeBanner} />
@@ -39,7 +35,7 @@ const Home = () => {
                 There are many variations of the passages of lorem Ipsum from available, majority.
               </Typography>
             </Box>
-            <Button variant='contained' color='primary' sx={{ maxWidth: '260px' }} endIcon={<ArrowForwardIcon />}>
+            <Button variant='contained' color='primary' sx={{ maxWidth: '280px' }} endIcon={<ArrowForwardIcon />}>
               Explore our products
             </Button>
           </Box>
@@ -208,7 +204,7 @@ const Home = () => {
 
       {/* Footer */}
       <Footer />
-    </Box>
+    </>
   );
 };
 

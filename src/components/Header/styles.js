@@ -19,4 +19,13 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'space-between',
     borderBottom: '1px solid #B9BBB3',
   },
+  headerLayout: {
+    padding: '0px 100px',
+    boxShadow: '0px 4px 30px 0px #7272721A',
+  },
+  iconButton: {
+    padding: '12px',
+    background: '#E0E8CA !important',
+    borderRadius: '50%',
+  },
 }));

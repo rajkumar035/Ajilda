@@ -5,47 +5,70 @@ import logo from "../../Assets/PNG's/logo.png";
 import { useStyles } from './styles';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../utils/routes.json';
 
 const Header = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
 
   return (
-    <Box component={'nav'} padding={'0px 100px'} boxShadow={'0px 4px 30px 0px #7272721A'}>
-      <Box component={'div'} className={`${classes.flexCenter} ${classes.containerLayout}`}>
-        <Box component={'div'} className={classes.flexCenter} gap={'72px'}>
-          <SearchIcon sx={{ height: '28px', width: '28px' }} />
+    <>
+      <Box component={'nav'} className={classes.headerLayout}>
+        <Box component={'div'} className={`${classes.flexCenter} ${classes.containerLayout}`}>
+          <Box component={'div'} className={classes.flexCenter} gap={'72px'}>
+            <SearchIcon sx={{ height: '28px', width: '28px' }} />
+            <Typography
+              variant='smallRegular'
+              className='cursor-pointer'
+              component={'h6'}
+              color={'#0C0F04'}
+              onClick={() => {
+                navigate(routes.about);
+              }}>
+              About Us
+            </Typography>
+          </Box>
+          <Box
+            component={'img'}
+            src={logo}
+            className={`cursor-pointer ${classes.logoStyles}`}
+            onClick={() => {
+              navigate(routes.home);
+            }}
+          />
+          <Box component={'div'} className={classes.flexCenter} gap={'36px'}>
+            <Badge color='primary' badgeContent={4} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
+              <LocalMallOutlinedIcon sx={{ height: '24px', width: '24px' }} />
+            </Badge>
+            <IconButton
+              className={classes.iconButton}
+              onClick={() => {
+                navigate(routes.profile);
+              }}>
+              <PersonOutlinedIcon sx={{ height: '24px', width: '24px' }} />
+            </IconButton>
+          </Box>
+        </Box>
+        <Box component={'div'} className={`${classes.flexCenter} ${classes.containerLayoutII}`}>
           <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
-            About Us
+            Bath & Body
+          </Typography>
+          <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
+            Face
+          </Typography>
+          <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
+            Hair Care
+          </Typography>
+          <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
+            Combos
+          </Typography>
+          <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
+            Gifts
           </Typography>
         </Box>
-        <Box component={'img'} src={logo} className={classes.logoStyles} />
-        <Box component={'div'} className={classes.flexCenter} gap={'36px'}>
-          <Badge color='primary' badgeContent={4} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}>
-            <LocalMallOutlinedIcon sx={{ height: '24px', width: '24px' }} />
-          </Badge>
-          <IconButton sx={{ padding: '12px', background: '#E0E8CA', borderRadius: '50%' }}>
-            <PersonOutlinedIcon sx={{ height: '18px', width: '18px' }} />
-          </IconButton>
-        </Box>
       </Box>
-      <Box component={'div'} className={`${classes.flexCenter} ${classes.containerLayoutII}`}>
-        <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
-          Bath & Body
-        </Typography>
-        <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
-          Face
-        </Typography>
-        <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
-          Hair Care
-        </Typography>
-        <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
-          Combos
-        </Typography>
-        <Typography variant='smallRegular' component={'h6'} color={'#0C0F04'}>
-          Gifts
-        </Typography>
-      </Box>
-    </Box>
+    </>
   );
 };
 

@@ -1,6 +1,5 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import Header from '../../components/Header';
 import { useStyles } from './styles';
 import DeliveryAddress from './components/DeliveryAddress';
 import ProfileDetails from './components/ProfileDetails';
@@ -49,33 +48,27 @@ const Profile = () => {
   };
 
   return (
-    <Box component={'article'}>
-      {/* Header */}
-      <Header />
-
-      {/* Main Section */}
-      <Box component={'section'} padding={'50px 125px'}>
-        <Grid container>
-          <Grid item lg={2}>
-            <Box component={'div'} className={classes.flexColumn} gap={'40px'} padding={'30px 0px'}>
-              <Box component={'div'} className={classes.flexColumn} gap={'12px'}>
-                <Typography variant='mediumExtraBold' component={'h6'} color={'#0F1405'}>
-                  My Profile
-                </Typography>
-                <Box component={'div'} className={classes.tabHeaderFooter} />
-              </Box>
-              <CustomTab value={TabStates.Profile}>ProfileDetails</CustomTab>
-              <CustomTab value={TabStates.Orders}>My Order</CustomTab>
-              <CustomTab value={TabStates.Address}>Delivery Address</CustomTab>
+    <Box component={'section'} padding={'50px 125px'}>
+      <Grid container>
+        <Grid item lg={2}>
+          <Box component={'div'} className={classes.flexColumn} gap={'40px'} padding={'30px 0px'}>
+            <Box component={'div'} className={classes.flexColumn} gap={'12px'}>
+              <Typography variant='mediumExtraBold' component={'h6'} color={'#0F1405'}>
+                My Profile
+              </Typography>
+              <Box component={'div'} className={classes.tabHeaderFooter} />
             </Box>
-          </Grid>
-          <Grid item lg={10}>
-            <Box component={'div'} className={classes.tabContainer}>
-              <MainTab />
-            </Box>
-          </Grid>
+            <CustomTab value={TabStates.Profile}>ProfileDetails</CustomTab>
+            <CustomTab value={TabStates.Orders}>My Order</CustomTab>
+            <CustomTab value={TabStates.Address}>Delivery Address</CustomTab>
+          </Box>
         </Grid>
-      </Box>
+        <Grid item lg={10}>
+          <Box component={'div'} className={classes.tabContainer}>
+            <MainTab />
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

@@ -12,9 +12,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import PlaceIcon from '@mui/icons-material/Place';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import image1 from '../../asset/Group 1.svg';
-import image2 from '../../asset/Group 2.svg';
-import image3 from '../../asset/Group 3.svg';
+import image1 from "../../Assets/SVG's/Group 1.svg";
+import image2 from "../../Assets/SVG's/Group 2.svg";
+import image3 from "../../Assets/SVG's/Group 3.svg";
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -106,10 +106,10 @@ const ProductDetails = () => {
             <div style={{ display: 'flex' }}>
               <div className={classes.thumbnailContainer}>
                 {Object.keys(product.product.image).map((key) => (
-                  <img key={key} src={product.product.image[key]} alt='' className={`${classes.thumbnail} ${selectedImage === product.product.image[key] ? classes.selectedThumbnail : ''}`} onClick={() => setSelectedImage(product.product.image[key])} />
+                  <img key={key} src={product.product.image[key]} alt='Check' className={`${classes.thumbnail} ${selectedImage === product.product.image[key] ? classes.selectedThumbnail : ''}`} onClick={() => setSelectedImage(product.product.image[key])} />
                 ))}
               </div>
-              <img src={selectedImage} alt='' className={classes.largeImage} />
+              <img src={selectedImage} alt='Check' className={classes.largeImage} />
             </div>
           </Grid>
           <Grid item xs={12} md={6} sm={12} lg={6} style={{ height: '90vh', overflow: 'scroll' }}>
@@ -266,7 +266,7 @@ const ProductDetails = () => {
                 <Grid item xs={4} sm={4} md={4} style={{ padding: 10 }}>
                   <Grid container style={{ backgroundColor: '#F5F8EE', padding: 20, borderRadius: 12 }}>
                     <Grid item xs={3}>
-                      <img src={item?.imag} style={{ height: 80, width: 80, margin: 10 }} />
+                      <img src={item?.imag} alt='Check' style={{ height: 80, width: 80, margin: 10 }} />
                     </Grid>
                     <Grid item xs={9}>
                       <h4 style={{ margin: 0, marginLeft: 3, textAlign: 'left' }}>{item?.name}</h4>
@@ -285,7 +285,7 @@ const ProductDetails = () => {
               {WhyShouldBuy.map((item, index) => (
                 <Grid item xs={12} sm={12} md={6} style={{ padding: '30px 0px 0px 20px' }}>
                   <Grid>
-                    <img src={item?.img} style={{ height: 250, width: '100%', borderRadius: 12 }}></img>
+                    <img src={item?.img} alt='Check' style={{ height: 250, width: '100%', borderRadius: 12 }}></img>
                   </Grid>
                   <Grid style={{ textAlign: 'left' }}>
                     <div style={{ color: '#424C23', padding: '0px 20px 20px 20px' }}>
@@ -304,8 +304,8 @@ const ProductDetails = () => {
       {/* Rated */}
       <Grid container style={{ marginTop: 80, backgroundColor: '#F5F8EE', padding: 100 }}>
         <Grid item md={5}>
-          <img src='https://bhubotanicals.com/cdn/shop/files/Photo_bcc348e9-c2da-4b4a-b8c0-cb7f2d3210b5.jpg?v=1711214884&width=2048' style={{ position: 'absolute', border: '10px solid #F5F8EE', height: 175, width: 165 }} />
-          <img src='https://m.media-amazon.com/images/I/A19zOEH4oFL._AC_UF1000,1000_QL80_.jpg' height='100' width='80' style={{ position: 'static', height: 350, width: 320, padding: '16px 10px 10px 100px' }} />
+          <img src='https://bhubotanicals.com/cdn/shop/files/Photo_bcc348e9-c2da-4b4a-b8c0-cb7f2d3210b5.jpg?v=1711214884&width=2048' style={{ position: 'absolute', border: '10px solid #F5F8EE', height: 175, width: 165 }} alt='Check' />
+          <img src='https://m.media-amazon.com/images/I/A19zOEH4oFL._AC_UF1000,1000_QL80_.jpg' height='100' width='80' style={{ position: 'static', height: 350, width: 320, padding: '16px 10px 10px 100px' }} alt='Check' />
         </Grid>
         <Grid item md={3}>
           <h1>Rated 4.8</h1>
