@@ -6,9 +6,9 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import whatweoffer from "../../Assets/PNG's/whatweoffer.png";
 import soldBanner from "../../Assets/PNG's/soldBanner.png";
 import TestimonialCards from '../../components/TestimonialCards';
-import Contact from '../../components/Contact';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import Contact from '../Contact';
 
 const About = () => {
   const classes = useStyles();
@@ -48,7 +48,7 @@ const About = () => {
             We stand out because of what we offer. You are our priority!
           </Typography>
         </Box>
-        <Box component={'div'} className={classes.flexCenter} justifyContent={'space-between'}>
+        <Box component={'div'} className={classes.flexCenter} justifyContent={'space-evenly'}>
           {[1, 2, 3].map((items, index) => {
             return (
               <Box key={index} component={'div'} alignItems={'center'} className={classes.flexColumn} gap={'14px'}>

@@ -54,15 +54,15 @@ const Profile = () => {
       <Header />
 
       {/* Main Section */}
-      <Box component={'section'} sx={{ padding: '80px 100px' }}>
+      <Box component={'section'} padding={'50px 125px'}>
         <Grid container>
           <Grid item lg={2}>
-            <Box component={'div'} className={classes.flexColumn} gap={'40px'}>
+            <Box component={'div'} className={classes.flexColumn} gap={'40px'} padding={'30px 0px'}>
               <Box component={'div'} className={classes.flexColumn} gap={'12px'}>
                 <Typography variant='mediumExtraBold' component={'h6'} color={'#0F1405'}>
                   My Profile
                 </Typography>
-                <Box component={'div'} sx={{ height: '4px', width: '24px', background: '#6F813C' }} />
+                <Box component={'div'} className={classes.tabHeaderFooter} />
               </Box>
               <CustomTab value={TabStates.Profile}>ProfileDetails</CustomTab>
               <CustomTab value={TabStates.Orders}>My Order</CustomTab>
@@ -70,7 +70,7 @@ const Profile = () => {
             </Box>
           </Grid>
           <Grid item lg={10}>
-            <Box component={'div'} paddingLeft={'80px'} borderLeft={'1px solid #E8E8E8'}>
+            <Box component={'div'} className={classes.tabContainer}>
               <MainTab />
             </Box>
           </Grid>

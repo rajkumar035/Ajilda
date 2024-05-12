@@ -14,7 +14,7 @@ import CategoryCards from './components/CategoryCards';
 import Better from "../../Assets/PNG's/better.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
-import Contact from '../../components/Contact';
+import Contact from '../Contact';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 

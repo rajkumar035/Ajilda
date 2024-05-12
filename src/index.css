@@ -38,3 +38,8 @@ title {
 .img-cover {
   object-fit: cover;
 }
+
+.custom-btn {
+  font-size: 16px !important;
+  min-width: 120px !important;
+}
