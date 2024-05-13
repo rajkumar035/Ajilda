@@ -1,6 +1,6 @@
 import { Box, Button, Rating, Typography } from '@mui/material';
 import React from 'react';
-import Product from '../../../../Assets/Images/Product.jfif';
+import Product from '../../../../assets/Images/Product.jfif';
 import { useStyles } from '../../styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { tabStateLabel } from '../..';
@@ -83,7 +83,7 @@ const OrderCards = (props) => {
     switch (mode) {
       case tabStateLabel[0]:
         return (
-          <Box component={'div'} className={classes.flexColumn} gap={'24px'}>
+          <Box component={'div'} className={classes.flexColumn} gap={'18px'}>
             <Typography component={'h6'} variant='mediumThin' color={'#6B6B6B'}>
               Delivery expected by
             </Typography>
@@ -94,7 +94,7 @@ const OrderCards = (props) => {
         );
       case tabStateLabel[1]:
         return (
-          <Box component={'div'} className={classes.flexColumn} gap={'24px'}>
+          <Box component={'div'} className={classes.flexColumn} gap={'18px'}>
             <Rating defaultValue={4} readOnly />
             <Typography component={'h6'} variant='mediumExtraBold' color={'#192108'}>
               Write a review
@@ -110,7 +110,7 @@ const OrderCards = (props) => {
 
   return (
     <Box component={'div'} className={classes.orderCardLayout}>
-      <Box component={'div'} className={classes.flexCenter} gap={'36px'}>
+      <Box component={'div'} className={classes.flexCenter} gap={'28px'}>
         <Box component={'img'} src={Product} className={classes.productImage} />
         <Box component={'div'} className={classes.flexColumn} gap={'18px'}>
           <Box component={'div'} className={classes.flexCenter} gap={'12px'}>
@@ -142,7 +142,7 @@ const OrderCards = (props) => {
           </Box>
         </Box>
       </Box>
-      <Box component={'div'} className={classes.flexColumn} gap={'24px'}>
+      <Box component={'div'} className={classes.flexColumn} gap={'18px'}>
         <Typography variant='mediumThin' color={'#6B6B6B'} component={'h6'}>
           Status
         </Typography>

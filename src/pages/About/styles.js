@@ -10,10 +10,10 @@ export const useStyles = makeStyles(() => ({
     transform: 'scaleX(-1)',
   },
   homeHeading: {
-    fontSize: '65px !important',
+    fontSize: '54px !important',
     fontWeight: '400 !important',
     color: '#fff !important',
-    lineHeight: '5rem !important',
+    lineHeight: '4rem !important',
     fontFamily: 'DM Serif Display !important',
   },
   bannerContainer: {
@@ -50,14 +50,14 @@ export const useStyles = makeStyles(() => ({
     padding: '100px',
   },
   containerHeading: {
-    fontSize: '42px !important',
+    fontSize: '36px !important',
     fontWeight: '400 !important',
     fontFamily: 'DM Serif Display !important',
     color: '#000 !important',
     textAlign: 'center !important',
   },
   offerContentHeading: {
-    fontSize: '28px !important',
+    fontSize: '24px !important',
     fontWeight: '700 !important',
     fontFamily: 'Inter !important',
     color: '#0F1405 !important',

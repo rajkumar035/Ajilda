@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import staticBg from "../../Assets/PNG's/SttaicBG.png";
+import staticBg from "../../assets/PNG's/SttaicBG.png";
 
 export const useStyles = makeStyles((theme) => ({
   homeBanner: {
@@ -11,10 +11,10 @@ export const useStyles = makeStyles((theme) => ({
     transform: 'scaleX(-1)',
   },
   homeHeading: {
-    fontSize: '65px !important',
+    fontSize: '54px !important',
     fontWeight: '400 !important',
     color: '#fff !important',
-    lineHeight: '5rem !important',
+    lineHeight: '4rem !important',
     fontFamily: 'DM Serif Display !important',
   },
   bannerContainer: {
@@ -62,7 +62,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '100px',
   },
   containerHeading: {
-    fontSize: '42px !important',
+    fontSize: '36px !important',
     fontWeight: '400 !important',
     fontFamily: 'DM Serif Display !important',
     color: '#000 !important',
@@ -70,16 +70,18 @@ export const useStyles = makeStyles((theme) => ({
   },
   cardContainer: {
     background: '#F5F8EE',
-    padding: '60px',
-    gap: '250px',
+    padding: '50px',
+    gap: '150px',
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     borderRadius: '25px',
   },
   cardContainerHeading: {
-    fontSize: '60px !important',
+    fontSize: '54px !important',
     fontWeight: '400 !important',
     fontFamily: 'DM Serif Display !important',
+    lineHeight: '5rem !important',
   },
   staticContainerBg: {
     background: `url(${staticBg})`,
@@ -99,11 +101,11 @@ export const useStyles = makeStyles((theme) => ({
   staticContainerContentLayout: {
     gap: '60px',
     margin: '150px auto',
-    width: '35%',
+    width: '40%',
     alignItems: 'center',
   },
   staticContainerHeading: {
-    fontSize: '60px !important',
+    fontSize: '52px !important',
     fontWeight: '400 !important',
     fontFamily: 'DM Serif Display !important',
     color: '#fff !important',
@@ -134,13 +136,13 @@ export const useStyles = makeStyles((theme) => ({
   categoryCardContainerText: {
     fontFamily: 'DM Serif Display !important',
     fontWeight: '400 !important',
-    fontSize: '38px !important',
+    fontSize: '34px !important',
     color: '#fff !important',
   },
   categoryCardContainerLink: {
     fontFamily: 'Inter !important',
     fontWeight: '400 !important',
-    fontSize: '28px !important',
+    fontSize: '22px !important',
     color: '#fff !important',
   },
   deliveryCardContainerLayout: {

@@ -4,7 +4,7 @@ export const useStyles = makeStyles(() => ({
   logoStyles: {
     height: '50px',
     width: 'auto',
-    marginBottom: '90px',
+    marginBottom: '60px',
   },
   seperator: {
     height: '16px',
@@ -20,6 +20,6 @@ export const useStyles = makeStyles(() => ({
     alignItems: 'center',
   },
   padding100: {
-    padding: '100px',
+    padding: '60px 100px',
   },
 }));

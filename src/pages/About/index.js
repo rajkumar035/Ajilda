@@ -1,10 +1,10 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useStyles } from './styles';
-import HomeBg from '../../Assets/Images/Home.jfif';
+import HomeBg from '../../assets/Images/Home.jfif';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import whatweoffer from "../../Assets/PNG's/whatweoffer.png";
-import soldBanner from "../../Assets/PNG's/soldBanner.png";
+import whatweoffer from "../../assets/PNG's/whatweoffer.png";
+import soldBanner from "../../assets/PNG's/soldBanner.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import Footer from '../../components/Footer';
 import Contact from '../Contact';
@@ -23,7 +23,7 @@ const About = () => {
               <Typography className={classes.homeHeading} component={'h6'}>
                 About Ajilda
               </Typography>
-              <Typography variant='mediumThin' color={'#fff'}>
+              <Typography variant='mediumThin' lineHeight={'1.5rem'} color={'#fff'}>
                 Lorem ipsum dolor sit amet consectetur. Id ultrices lacus quam malesuada scelerisque iaculis lacus. Faucibus semper lacus lorem euismod nulla lorem est. Pellentesque ipsum ac scelerisque laoreet consequat. Amet risus volutpat sapien.
               </Typography>
             </Box>
@@ -40,20 +40,20 @@ const About = () => {
           <Typography className={classes.containerHeading} component={'h6'}>
             What we offer
           </Typography>
-          <Typography variant='mediumRegular' color={'#000'} component={'h6'}>
+          <Typography variant='smallRegular' color={'#000'} component={'h6'}>
             We stand out because of what we offer. You are our priority!
           </Typography>
         </Box>
-        <Box component={'div'} className={classes.flexCenter} justifyContent={'space-evenly'}>
+        <Box component={'div'} className={classes.flexCenter} justifyContent={'space-around'}>
           {[1, 2, 3].map((items, index) => {
             return (
               <Box key={index} component={'div'} alignItems={'center'} className={classes.flexColumn} gap={'14px'}>
                 <Box component={'div'} sx={{ border: '1px solid #8EA64C', padding: '5px', borderRadius: '50%' }}>
-                  <Box component={'img'} src={whatweoffer} sx={{ height: '350px', width: '350px', border: '1px solid #8EA64C', borderRadius: '50%', objectFit: 'cover' }} />
+                  <Box component={'img'} src={whatweoffer} sx={{ height: '300px', width: '300px', border: '1px solid #8EA64C', borderRadius: '50%', objectFit: 'cover' }} />
                 </Box>
                 <Box component={'div'} className={classes.flexColumn} alignItems={'center'} gap={'7px'}>
                   <Typography className={classes.offerContentHeading}>Organic Solution</Typography>
-                  <Typography variant='mediumRegular' color={'#6B6B6B'}>
+                  <Typography variant='smallRegular' color={'#6B6B6B'}>
                     Lorem ipsum is a dummy text
                   </Typography>
                 </Box>

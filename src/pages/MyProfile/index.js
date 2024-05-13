@@ -48,7 +48,7 @@ const Profile = () => {
   };
 
   return (
-    <Box component={'section'} padding={'50px 125px'}>
+    <Box component={'section'} padding={'30px 100px'}>
       <Grid container>
         <Grid item lg={2}>
           <Box component={'div'} className={classes.flexColumn} gap={'40px'} padding={'30px 0px'}>

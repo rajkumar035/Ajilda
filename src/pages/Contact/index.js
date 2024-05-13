@@ -54,7 +54,7 @@ const Contact = () => {
                   label='Full name'
                   InputLabelProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -62,7 +62,7 @@ const Contact = () => {
                   }}
                   inputProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -75,7 +75,7 @@ const Contact = () => {
                   label='Phone number'
                   InputLabelProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -83,7 +83,7 @@ const Contact = () => {
                   }}
                   inputProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -96,7 +96,7 @@ const Contact = () => {
                   label='Email'
                   InputLabelProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -104,7 +104,7 @@ const Contact = () => {
                   }}
                   inputProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -119,7 +119,7 @@ const Contact = () => {
                   label='Hello I would like to know about...'
                   InputLabelProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',
@@ -127,7 +127,7 @@ const Contact = () => {
                   }}
                   inputProps={{
                     style: {
-                      fontSize: '20px',
+                      fontSize: '16px',
                       fontWeight: '400',
                       color: '#49503A',
                       paddingBottom: '16px',

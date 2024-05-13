@@ -15,7 +15,7 @@ export const useStyles = makeStyles(() => ({
     background: '#6F813C',
   },
   tabContainer: {
-    paddingLeft: '60px',
+    paddingLeft: '50px',
     paddingTop: '30px',
     borderLeft: '1px solid #E8E8E8',
     height: '66vh',

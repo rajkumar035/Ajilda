@@ -1,14 +1,14 @@
 import { Box, Button, Chip, Typography } from '@mui/material';
 import React from 'react';
-import Home from '../../Assets/Images/Home.jfif';
+import Home from '../../assets/Images/Home.jfif';
 import StarIcon from '@mui/icons-material/Star';
-import success from '../../Assets/Icons/Success.png';
+import success from '../../assets/Icons/Success.png';
 
 const ProductCard = () => {
   return (
     <Box width={'100%'} component={'div'}>
       <Box component={'div'} position={'relative'}>
-        <Box component={'img'} src={Home} width={'100%'} height={'240px'} sx={{ objectFit: 'cover', borderRadius: '12px' }} />
+        <Box component={'img'} src={Home} width={'100%'} height={'200px'} sx={{ objectFit: 'cover', borderRadius: '12px' }} />
       </Box>
       <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '10px 0px' }}>
         <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>

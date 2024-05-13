@@ -1,17 +1,17 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useStyles } from './styles';
-import HomeBg from '../../Assets/Images/Home.jfif';
+import HomeBg from '../../assets/Images/Home.jfif';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import LeafLeft from "../../Assets/PNG's/leaftLeft.png";
-import LeafRight from "../../Assets/PNG's/leaftRight.png";
-import ContentBg from '../../Assets/Images/contentBg.jpg';
-import Delivery from '../../Assets/Icons/delivery.png';
-import Star from '../../Assets/Icons/star.png';
-import Results from '../../Assets/Icons/results.png';
+import LeafLeft from "../../assets/PNG's/leaftLeft.png";
+import LeafRight from "../../assets/PNG's/leaftRight.png";
+import ContentBg from '../../assets/Images/contentBg.jpg';
+import Delivery from '../../assets/Icons/delivery.png';
+import Star from '../../assets/Icons/star.png';
+import Results from '../../assets/Icons/results.png';
 import ProductCard from '../../components/ProductCard';
 import CategoryCards from './components/CategoryCards';
-import Better from "../../Assets/PNG's/better.png";
+import Better from "../../assets/PNG's/better.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
 import Contact from '../Contact';
@@ -31,7 +31,7 @@ const Home = () => {
               <Typography className={classes.homeHeading} component={'h6'}>
                 Lorem ispum dolar sit
               </Typography>
-              <Typography variant='mediumThin' color={'#fff'}>
+              <Typography variant='mediumThin' color={'#fff'} lineHeight={'1.5rem'}>
                 There are many variations of the passages of lorem Ipsum from available, majority.
               </Typography>
             </Box>
@@ -112,7 +112,7 @@ const Home = () => {
         <Box component={'div'} className={classes.cardContainer}>
           <Box component={'div'} className={classes.flexColumn} gap={'35px'}>
             <Typography component={'h6'} className={classes.cardContainerHeading} color={'#1C2409'}>
-              Make your skin better with{' '}
+              Make your skin better with
               <Typography component={'span'} className={classes.cardContainerHeading} color={'#56642E'}>
                 Ajilda
               </Typography>
@@ -125,7 +125,7 @@ const Home = () => {
               Discover More
             </Button>
           </Box>
-          <Box component={'img'} src={Better} height={'560px'} width={'100%'} className='img-contains' />
+          <Box component={'img'} src={Better} height={'420px'} width={'100%'} className='img-contains' />
         </Box>
         <Box component={'div'} className={classes.flexColumn} gap={'60px'}>
           <Typography className={classes.containerHeading} component={'h6'}>
@@ -166,7 +166,7 @@ const Home = () => {
             {[1, 2, 3].map((items, index) => {
               return (
                 <Grid item lg={4} md={2} sm={1} key={index}>
-                  <TestimonialCards />
+                  <TestimonialCards index={index} />
                 </Grid>
               );
             })}
@@ -176,7 +176,7 @@ const Home = () => {
 
       {/* Deliver */}
       <Box component={'section'} width={'100%'} padding={'40px 0px 120px 0px'}>
-        <Grid container height={'70vh'} width={'100%'}>
+        <Grid container height={'90vh'} width={'100%'}>
           <Grid item container lg={3.5} spacing={3}>
             <Grid item lg={12} height={'60%'}>
               <DeliverCards />

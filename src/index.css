@@ -1,16 +1,16 @@
 @font-face {
   font-family: 'DM Serif Display';
-  src: url(./Assets/Fonts/DMSerifDisplay-Regular.woff2);
+  src: url(./assets/Fonts/DMSerifDisplay-Regular.woff2);
 }
 
 @font-face {
   font-family: 'Open Sans';
-  src: url(./Assets/Fonts/OpenSans-VariableFont.woff2);
+  src: url(./assets/Fonts/OpenSans-VariableFont.woff2);
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url(./Assets/Fonts/InterVariable.woff2);
+  src: url(./assets/Fonts/InterVariable.woff2);
 }
 
 * {
@@ -40,10 +40,24 @@ title {
 }
 
 .custom-btn {
-  font-size: 16px !important;
-  min-width: 120px !important;
+  font-size: 14px !important;
+  min-width: 100px !important;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.hover-view-content {
+  display: block !important;
+  left: 0px !important;
+  transition: 1.2s;
+  opacity: 1 !important;
+}
+
+.hover-view-content-leave {
+  display: none !important;
+  left: -400px !important;
+  transition: 1.2s;
+  opacity: 0 !important;
 }

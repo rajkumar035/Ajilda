@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import ContactBg from "../../Assets/PNG's/ContactBg.png";
+import ContactBg from "../../assets/PNG's/ContactBg.png";
 
 export const useStyles = makeStyles(() => ({
   contactBgStyles: {
@@ -16,7 +16,7 @@ export const useStyles = makeStyles(() => ({
     margin: '0px auto',
   },
   contactHeading: {
-    fontSize: '50px !important',
+    fontSize: '44px !important',
     fontWeight: '400 !important',
     color: '#292F36 !important',
     fontFamily: 'DM Serif Display !important',
@@ -29,11 +29,11 @@ export const useStyles = makeStyles(() => ({
     height: '100%',
   },
   contactIcon: {
-    height: '24px',
+    height: '16px',
     width: 'auto',
     color: '#B89354',
     background: '#FFFFFF',
-    padding: '14px',
+    padding: '10px',
     borderRadius: '50%',
   },
   flexCenter: {
