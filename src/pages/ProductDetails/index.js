@@ -263,17 +263,29 @@ const ProductDetails = () => {
               alignItems="center"
               spacing={2}
             >
-              <Grid item>
-                <IconButton onClick={handleDecrement} disabled={count === 1}>
-                  <RemoveIcon />
-                </IconButton>
-              </Grid>
-              <Grid item>{count}</Grid>
-              <Grid item>
-                <IconButton onClick={handleIncrement}>
-                  <AddIcon />
-                </IconButton>
-              </Grid>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  border: "1px solid #000",
+                  justifyContent:"center",
+                  borderRadius: "10px",
+                  width: "100px",
+                  margin:"20px 0px 0px 15px"
+                }}
+              >
+                <Grid item>
+                  <IconButton onClick={handleDecrement} disabled={count === 1}>
+                    <RemoveIcon />
+                  </IconButton>
+                </Grid>
+                <Grid item>{count}</Grid>
+                <Grid item>
+                  <IconButton onClick={handleIncrement}>
+                    <AddIcon />
+                  </IconButton>
+                </Grid>
+              </div>
               <Grid item>
                 <button className={classes.button}>Add to cart</button>
               </Grid>
@@ -562,7 +574,7 @@ const ProductDetails = () => {
           </button>
         </Grid>
       </Grid>
-      <Divider sx={{margin:"0px 50px"}}/>
+      <Divider sx={{ margin: "0px 50px" }} />
       <Grid
         container
         style={{ padding: "10px 50px", backgroundColor: "#F5F8EE" }}
@@ -582,10 +594,18 @@ const ProductDetails = () => {
           >
             <React.Fragment key={person.id}>
               <Grid item md={8}>
-                <p style={{ color: "#56642E", fontSize: "16px", fontWeight:"bold" }}>
+                <p
+                  style={{
+                    color: "#56642E",
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                  }}
+                >
                   {productDescription}
                 </p>
-                <p style={{ color: "#56642E", fontSize:"14px" }}>Good Product at a good price</p>
+                <p style={{ color: "#56642E", fontSize: "14px" }}>
+                  Good Product at a good price
+                </p>
                 <Rating
                   name="half-rating-read"
                   style={{ color: "#faaf00" }}
@@ -598,11 +618,11 @@ const ProductDetails = () => {
                   src={person.testimonialImage}
                   alt="customer testimonial"
                   width="200px"
-                  style={{marginTop:"10px"}}
+                  style={{ marginTop: "10px" }}
                 />
               </Grid>
               <Grid item md={4}>
-                <p style={{ textAlign: "end", fontSize:"14px" }}>
+                <p style={{ textAlign: "end", fontSize: "14px" }}>
                   {person.name} | {person.date}
                 </p>
               </Grid>
