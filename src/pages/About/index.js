@@ -97,7 +97,7 @@ const About = () => {
             {[1, 2, 3].map((items, index) => {
               return (
                 <Grid item lg={4} md={2} sm={1} key={index}>
-                  <TestimonialCards />
+                  <TestimonialCards index={index} />
                 </Grid>
               );
             })}

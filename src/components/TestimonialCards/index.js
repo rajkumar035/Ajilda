@@ -42,6 +42,33 @@ const useStyles = makeStyles(() => ({
     width: '1px',
     background: '#8C8C8C',
   },
+  container: {
+    position: 'relative',
+    height: '420px',
+    width: 'auto',
+  },
+  contentConatiner: {
+    position: 'absolute',
+    background: `#fff`,
+    width: '100%',
+    borderRadius: '12px',
+    border: '2px solid rgba(0, 0, 0, 0.2)',
+    left: '-400px',
+    opacity: '0',
+    zIndex: '-1',
+    top: '0px',
+  },
+  contentConatinerLayout: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    alignItems: 'start',
+    gap: '60px',
+    maxHeight: '420px',
+    padding: '0px 26px',
+    marginTop: '30px',
+    width: 'auto',
+  },
 }));
 
 const TestimonialCards = (props) => {
@@ -49,20 +76,8 @@ const TestimonialCards = (props) => {
   const classes = useStyles();
 
   return (
-    <Box component={'div'} position={'relative'} height={'420px'} width={'100%'}>
-      <Box
-        component={'div'}
-        className={`${classes.cardLayout} hover-testimonial`}
-        onMouseEnter={() => {
-          const getLayout = document.querySelector(`.hover-content-${index}`);
-          getLayout.classList.remove('hover-view-content-leave');
-          getLayout.classList.add('hover-view-content');
-        }}
-        onMouseLeave={() => {
-          const getLayout = document.querySelector(`.hover-content-${index}`);
-          getLayout.classList.remove('hover-view-content');
-          getLayout.classList.add('hover-view-content-leave');
-        }}>
+    <Box component={'div'} className={`${classes.container} hover-testimonial cursor-pointer`} zIndex={`${index === 0 ? 3 : index === 1 ? 2 : 1}`}>
+      <Box component={'div'} className={`${classes.cardLayout}`}>
         <Box component={'div'} className={classes.cardBody}>
           <Typography className={classes.cardTitle} component={'h6'}>
             Christina Smith
@@ -75,8 +90,8 @@ const TestimonialCards = (props) => {
           <Box component={'img'} height={'22px'} width={'auto'} src={Success} className='img-contains' />
         </Box>
       </Box>
-      <Box component={'div'} className={`hover-content-${index}`} sx={{ position: 'absolute', background: `#fff`, width: '100%', borderRadius: '12px', border: '2px solid rgba(0, 0, 0, 0.2)', left: '-400px', opacity: '0', zIndex: '1', top: '0px', transition: '1.2s' }}>
-        <Box component={'div'} sx={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignItems: 'start', gap: '60px', maxHeight: '420px', padding: '0px 26px', marginTop: '30px', width: 'auto' }}>
+      <Box component={'div'} className={`${classes.contentConatiner} hover-content`}>
+        <Box component={'div'} className={classes.contentConatinerLayout}>
           <Box component={'div'} className={classes.flexColumn} gap={'12px'}>
             <Typography variant='largeExtraBold' component={'h6'} color={'#0F1405'}>
               Super effective products

@@ -48,16 +48,36 @@ title {
   cursor: pointer;
 }
 
-.hover-view-content {
-  display: block !important;
+.hover-content {
+  transition: 0.8s;
+}
+
+.hover-testimonial:hover .hover-content {
   left: 0px !important;
-  transition: 1.2s;
+  opacity: 1 !important;
+  z-index: 1 !important;
+}
+
+.deliveryCardContainerTag,
+.deliveryCardLayout {
+  transition: 0.8s;
+}
+
+.deliveryCardContainerTitle {
+  opacity: 1;
+  transition: 0.8s;
+}
+
+.deliveryCardContainer:hover .deliveryCardContainerTag {
+  top: -90px !important;
   opacity: 1 !important;
 }
 
-.hover-view-content-leave {
-  display: none !important;
-  left: -400px !important;
-  transition: 1.2s;
-  opacity: 0 !important;
+.deliveryCardContainer:hover .deliveryCardContainerTitle {
+  opacity: 0;
+  padding-top: 0% !important;
+}
+
+.deliveryCardContainer:hover .deliveryCardLayout {
+  background: none !important;
 }
