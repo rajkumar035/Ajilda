@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Box, Tab, Tabs } from '@mui/material';
 import OrderCards from './components/OrderCards';
 import { useStyles } from './styles';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../utils/routes.json';
 
 export const tabStateLabel = {
   0: 'Active',
@@ -9,8 +11,9 @@ export const tabStateLabel = {
   2: 'Cancelled',
 };
 
-const MyOrders = () => {
+export const MyOrdersComponent = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [tabState, setTabState] = useState(0);
 
   const handleTabState = (index) => {
@@ -38,9 +41,26 @@ const MyOrders = () => {
       </Tabs>
       <Box component={'div'}>
         {[1, 2, 3, 4, 5, 6, 7].map((items, index) => {
-          return <OrderCards mode={tabStateLabel[tabState]} key={index} />;
+          return (
+            <Box
+              component={'div'}
+              className='cursor-pointer'
+              onClick={() => {
+                navigate(`/${routes.orderDetails}/${items}`, { state: { mode: tabStateLabel[tabState], data: {} } });
+              }}>
+              <OrderCards mode={tabStateLabel[tabState]} key={index} />
+            </Box>
+          );
         })}
       </Box>
+    </Box>
+  );
+};
+
+const MyOrders = () => {
+  return (
+    <Box component={'section'} padding={'30px 100px'}>
+      <MyOrdersComponent />
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useStyles } from './styles';
 import DeliveryAddress from './components/DeliveryAddress';
 import ProfileDetails from './components/ProfileDetails';
-import MyOrders from '../MyOrders';
+import { MyOrdersComponent } from '../MyOrders';
 
 const Profile = () => {
   const classes = useStyles();
@@ -39,7 +39,7 @@ const Profile = () => {
       case TabStates.Profile:
         return <ProfileDetails />;
       case TabStates.Orders:
-        return <MyOrders />;
+        return <MyOrdersComponent />;
       case TabStates.Address:
         return <DeliveryAddress />;
       default:
