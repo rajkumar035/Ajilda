@@ -5,10 +5,11 @@ export const useStyles = makeStyles((theme) => ({
   homeBanner: {
     height: '80vh',
     width: '100%',
-    objectFit: 'cover',
     position: 'absolute',
     zIndex: '-1',
-    transform: 'scaleX(-1)',
+    backgroundSize: 'cover !important',
+    backgroundPosition: 'center !important',
+    backgroundRepeat: 'no-repeat !important',
   },
   homeHeading: {
     fontSize: '54px !important',
@@ -156,8 +157,9 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: '400 !important',
     fontFamily: 'DM Serif Display !important',
     color: '#fff !important',
-    width: 'max-content !important',
+    width: '80% !important',
     margin: 'auto !important',
+    textAlign: 'center !important',
     paddingTop: '30% !important',
   },
   deliveryTagConatiner: {

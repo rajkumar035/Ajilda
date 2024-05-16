@@ -1,5 +1,5 @@
-import { Box, Button, Grid, Typography } from '@mui/material';
-import React from 'react';
+import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
+import React, { useState } from 'react';
 import { useStyles } from './styles';
 import HomeBg from '../../assets/Images/Home.jfif';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -16,15 +16,32 @@ import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
 import Contact from '../Contact';
 import Footer from '../../components/Footer';
+import image1 from '../../assets/Images/location1.png';
+import image2 from '../../assets/Images/location2.png';
 
 const Home = () => {
   const classes = useStyles();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovered(false);
+  };
 
   return (
     <>
       {/* Home */}
       <Box component={'section'} position={'relative'} boxShadow={'inset 28rem -1rem 20rem -3rem rgba(0, 0, 0, 0.8)'}>
-        <Box component={'img'} src={HomeBg} className={classes.homeBanner} />
+        <Box component={'div'} className='slider'>
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${HomeBg})`, animationDelay: '-0 !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${image1})`, animationDelay: '-2s !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${image2})`, animationDelay: '-4s !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${HomeBg})`, animationDelay: '-6s !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${image1})`, animationDelay: '-8s !important' }} />
+        </Box>
         <Box component={'div'} className={classes.bannerContainer}>
           <Box className={classes.flexColumn} gap={'48px'}>
             <Box className={classes.flexColumn} gap={'24px'}>
@@ -91,20 +108,20 @@ const Home = () => {
           </Typography>
           <Grid container spacing={3} height={'75vh'}>
             <Grid item lg={4} md={6} sm={12}>
-              <CategoryCards />
+              <CategoryCards index={0} />
             </Grid>
             <Grid item container lg={8} md={6} sm={12} spacing={3}>
               <Grid item lg={6} sm={12}>
-                <CategoryCards />
+                <CategoryCards index={1} />
               </Grid>
               <Grid item lg={6} sm={12}>
-                <CategoryCards />
+                <CategoryCards index={2} />
               </Grid>
               <Grid item lg={6} sm={12}>
-                <CategoryCards />
+                <CategoryCards index={3} />
               </Grid>
               <Grid item lg={6} sm={12}>
-                <CategoryCards />
+                <CategoryCards index={4} />
               </Grid>
             </Grid>
           </Grid>
@@ -150,7 +167,18 @@ const Home = () => {
           <Typography className={classes.staticContainerHeading} component={'p'}>
             Make your skin better with Ajilda
           </Typography>
-          <Button variant='outlined' color='primary' sx={{ minWidth: '320px' }}>
+          <Button
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
+            variant='outlined'
+            color='primary'
+            className='hover_button slow-transition'
+            sx={{ minWidth: '320px' }}
+            endIcon={
+              <svg width={isHovered ? '100' : '60'} height='40' viewBox='0 0 200 100' className='slow-transition'>
+                <path d={isHovered ? 'M0,50 L180,50 L170,40 M180,50 L170,60' : 'M0,50 L150,50 L140,40 M150,50 L140,60'} strokeWidth={'4px'} stroke='#fff' fill='none' className='slow-transition' />
+              </svg>
+            }>
             Explore products
           </Button>
         </Box>
@@ -179,21 +207,21 @@ const Home = () => {
         <Grid container height={'90vh'} width={'100%'}>
           <Grid item container lg={3.5} spacing={3}>
             <Grid item lg={12} height={'60%'}>
-              <DeliverCards />
+              <DeliverCards index={0} />
             </Grid>
             <Grid item lg={12} height={'40%'}>
-              <DeliverCards />
+              <DeliverCards index={1} />
             </Grid>
           </Grid>
           <Grid item lg={5} padding={'0px 20px'}>
-            <DeliverCards />
+            <DeliverCards index={2} />
           </Grid>
           <Grid item container spacing={3} lg={3.5}>
             <Grid item lg={12} height={'60%'}>
-              <DeliverCards />
+              <DeliverCards index={3} />
             </Grid>
             <Grid item lg={12} height={'40%'}>
-              <DeliverCards />
+              <DeliverCards index={4} />
             </Grid>
           </Grid>
         </Grid>
