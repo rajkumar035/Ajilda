@@ -116,3 +116,14 @@ title {
     animation-timing-function: ease;
   }
 }
+
+.MuiStepConnector-line {
+  display: block;
+  border-color: #000000;
+  border-top-style: solid;
+  border-top-width: 1px;
+  width: 80px;
+  padding: 14px 17px 1px 12px;
+  position: absolute;
+  margin: 0px -13px -20px -21px;
+}
