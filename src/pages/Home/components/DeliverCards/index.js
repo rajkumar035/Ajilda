@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import Testimonial from "../../../../assets/PNG's/Testimonials.png";
 import { useStyles } from '../../styles';
 import { styled } from '@mui/styles';
 import flag from "../../../../assets/PNG's/flag.png";

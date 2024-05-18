@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
+import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
 import Success from '../../assets/Icons/successCircle.png';
 import { makeStyles, styled } from '@mui/styles';

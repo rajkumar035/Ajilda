@@ -8,6 +8,7 @@ import category3 from '../../../../assets/Images/category3.png';
 import category4 from '../../../../assets/Images/category4.png';
 import category5 from '../../../../assets/Images/category5.jfif';
 import { useNavigate } from 'react-router-dom';
+import routes from '../../../../utils/routes.json';
 
 const CategoryCards = (props) => {
   const { index } = props;
@@ -17,27 +18,32 @@ const CategoryCards = (props) => {
   const categoryList = [
     {
       title: 'For Oily Skin',
+      data: 'oily skin',
       link: '',
       image: category1,
     },
     {
       title: 'For Dry Skin',
+      data: 'dry skin',
       link: '',
       image: category5,
     },
     {
       title: 'For Normal Skin',
       link: '',
+      data: 'normal skin',
       image: category4,
     },
     {
       title: 'For combination Skin',
       link: '',
+      data: 'combination skin',
       image: category3,
     },
     {
       title: 'For Normal Skin',
       link: '',
+      data: 'normal skin',
       image: category2,
     },
   ];
@@ -53,7 +59,7 @@ const CategoryCards = (props) => {
           component={'div'}
           className={`${classes.flexCenter} cursor-pointer`}
           onClick={() => {
-            navigate('/');
+            navigate(`/${routes.product}?use=${encodeURIComponent(categoryList[index].data)}`);
           }}>
           <Typography className={classes.categoryCardContainerLink} component={'h6'}>
             View Collection

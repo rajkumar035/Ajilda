@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { Routes } from 'react-router-dom';
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Typography, TextField, Button, Divider } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -16,7 +14,7 @@ const Cart = () => {
       quantity: '150ml',
       price: '$70',
       discountedPrice: '$99',
-      quantity: 1,
+      // quantity: 1,
       delete: false,
     },
     // Add more products as needed

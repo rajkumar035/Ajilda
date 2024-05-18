@@ -30,6 +30,7 @@ function App() {
   useEffect(() => {
     const getTitle = document.querySelector('title');
     getTitle.innerText = getTabText(pathName);
+    window.scrollTo(0, 0);
   }, [pathName]);
 
   return (

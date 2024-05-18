@@ -7,6 +7,7 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaLinkedinIn } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { useStyles } from './styles';
+import EastIcon from '@mui/icons-material/East';
 
 const Contact = () => {
   const classes = useStyles();
@@ -134,7 +135,7 @@ const Contact = () => {
                     },
                   }}
                 />
-                <Button fullWidth variant='contained' color='secondary' sx={{ padding: '9px' }}>
+                <Button fullWidth variant='contained' color='secondary' sx={{ padding: '9px' }} endIcon={<EastIcon />}>
                   Send now
                 </Button>
               </Box>

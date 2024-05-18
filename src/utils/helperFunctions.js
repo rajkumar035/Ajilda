@@ -25,3 +25,7 @@ export const getTabText = (pathName) => {
     return customName[0].toUpperCase() + customName.substring(1);
   }
 };
+
+export const shrinkTextBased = (limit = 0, text = '') => {
+  return text.length > limit ? `${text.substring(0, limit)}...` : text;
+};

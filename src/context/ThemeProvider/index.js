@@ -82,6 +82,7 @@ const ReactThemeProvider = ({ children }) => {
           { props: { variant: 'extraSmallThin' }, style: { fontSize: '12px', fontWeight: '400' } },
           { props: { variant: 'extraSmallRegular' }, style: { fontSize: '12px', fontWeight: '500' } },
           { props: { variant: 'extraSmallBold' }, style: { fontSize: '12px', fontWeight: '600' } },
+          { props: { variant: 'extraSmallExtraBold' }, style: { fontSize: '12px', fontWeight: '700' } },
           { props: { variant: 'smallThin' }, style: { fontSize: '14px', fontWeight: '400' } },
           { props: { variant: 'smallRegular' }, style: { fontSize: '14px', fontWeight: '500' } },
           { props: { variant: 'smallBold' }, style: { fontSize: '14px', fontWeight: '600' } },

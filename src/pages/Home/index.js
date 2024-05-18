@@ -1,4 +1,4 @@
-import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useStyles } from './styles';
 import HomeBg from '../../assets/Images/Home.jfif';
@@ -15,12 +15,16 @@ import Better from "../../assets/PNG's/better.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
 import Contact from '../Contact';
+import routes from '../../utils/routes.json';
 import Footer from '../../components/Footer';
 import image1 from '../../assets/Images/location1.png';
 import image2 from '../../assets/Images/location2.png';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseOver = () => {
@@ -30,6 +34,93 @@ const Home = () => {
   const handleMouseOut = () => {
     setIsHovered(false);
   };
+
+  const productList = [
+    {
+      img: HomeBg,
+      title: 'Goat Milk Soap',
+      description: 'Transformational treatments with dermo-purifying',
+      offer: 12,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 349.0,
+      status: 'Best seller',
+      category: 'Body',
+      condition: 'Oily Skin',
+    },
+    {
+      img: HomeBg,
+      title: 'Donkey Milk Soap',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 20,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 399.0,
+      status: 'Sold out',
+      category: 'Body',
+      condition: 'Dry Skin',
+    },
+    {
+      img: HomeBg,
+      title: 'Shampoo',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 12,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 499.0,
+      status: 'Most Searched',
+      category: 'Hair',
+    },
+    {
+      img: HomeBg,
+      title: 'Hair Serum',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 8,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 699.0,
+      category: 'Hair',
+    },
+  ];
+  const comboProductList = [
+    {
+      img: HomeBg,
+      title: 'Goat Milk Soap',
+      subTitle: 'Combo pack of 2',
+      description: 'Transformational treatments with dermo-purifying',
+      offer: 12,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 349.0,
+      status: 'Best seller',
+      category: 'Body',
+      condition: 'Oily Skin',
+    },
+    {
+      img: HomeBg,
+      title: 'Donkey Milk Soap',
+      subTitle: 'Combo pack of 2',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 20,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 399.0,
+      status: 'Sold out',
+      category: 'Body',
+      condition: 'Dry Skin',
+    },
+    {
+      img: HomeBg,
+      title: 'Shampoo',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 12,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 499.0,
+      status: 'Most Searched',
+      category: 'Hair',
+    },
+  ];
 
   return (
     <>
@@ -52,7 +143,14 @@ const Home = () => {
                 There are many variations of the passages of lorem Ipsum from available, majority.
               </Typography>
             </Box>
-            <Button variant='contained' color='primary' sx={{ maxWidth: '280px' }} endIcon={<ArrowForwardIcon />}>
+            <Button
+              variant='contained'
+              color='primary'
+              sx={{ maxWidth: '280px' }}
+              endIcon={<ArrowForwardIcon />}
+              onClick={() => {
+                navigate(`/${routes.product}`);
+              }}>
               Explore our products
             </Button>
           </Box>
@@ -93,10 +191,10 @@ const Home = () => {
         <Box component={'div'} className={classes.flexColumn} gap={'60px'}>
           <Typography className={classes.containerHeading}>Our Best Sellers</Typography>
           <Grid container width={'100%'} spacing={4}>
-            {[1, 2, 3, 4].map((items, index) => {
+            {productList.map((items, index) => {
               return (
                 <Grid item lg={3} md={2} sm={1} key={index}>
-                  <ProductCard />
+                  <ProductCard {...items} />
                 </Grid>
               );
             })}
@@ -138,7 +236,13 @@ const Home = () => {
               Lorem ipsum dolor sit amet consectetur. Morbi habitant volutpat sed curabitur gravida quis platea ac. Non ullamcorper sit egestas metus. Quam quam aliquam risus tristique.Lorem ipsum dolor sit amet consectetur. Morbi habitant volutpat sed curabitur gravida quis platea ac. Non
               ullamcorper sit egestas metus. Quam quam aliquam risus tristique.
             </Typography>
-            <Button variant='contained' color='primary' sx={{ maxWidth: '280px' }}>
+            <Button
+              variant='contained'
+              color='primary'
+              sx={{ maxWidth: '280px' }}
+              onClick={() => {
+                navigate(`/${routes.product}`);
+              }}>
               Discover More
             </Button>
           </Box>
@@ -149,10 +253,10 @@ const Home = () => {
             Our Best Combos
           </Typography>
           <Grid container width={'100%'} spacing={4}>
-            {[1, 2, 3].map((items, index) => {
+            {comboProductList.map((items, index) => {
               return (
                 <Grid item lg={4} md={2} sm={1} key={index}>
-                  <ProductCard />
+                  <ProductCard {...items} />
                 </Grid>
               );
             })}
@@ -170,6 +274,9 @@ const Home = () => {
           <Button
             onMouseOver={handleMouseOver}
             onMouseOut={handleMouseOut}
+            onClick={() => {
+              navigate(`/${routes.product}`);
+            }}
             variant='outlined'
             color='primary'
             className='hover_button slow-transition'

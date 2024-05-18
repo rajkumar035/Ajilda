@@ -164,7 +164,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   deliveryTagConatiner: {
     background: '#fff',
-    borderRadius: '50%',
     padding: '8px',
     width: '360px',
     display: 'flex',

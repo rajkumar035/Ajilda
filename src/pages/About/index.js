@@ -2,32 +2,57 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useStyles } from './styles';
 import HomeBg from '../../assets/Images/Home.jfif';
+import image1 from '../../assets/Images/location1.png';
+import image2 from '../../assets/Images/location2.png';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import whatweoffer from "../../assets/PNG's/whatweoffer.png";
 import soldBanner from "../../assets/PNG's/soldBanner.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import Footer from '../../components/Footer';
 import Contact from '../Contact';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../utils/routes.json';
 
 const About = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
+
+  const content = [
+    { count: 12, achivements: 'Products Sold' },
+    { count: 85, achivements: 'Countries Serving' },
+    { count: 15, achivements: 'Products in-house' },
+    { count: 95, achivements: 'Happy Customers' },
+  ];
 
   return (
     <>
       {/* Home */}
       <Box component={'section'} position={'relative'} boxShadow={'inset 28rem -1rem 20rem -3rem rgba(0, 0, 0, 0.8)'}>
-        <Box component={'img'} src={HomeBg} className={classes.homeBanner} />
+        <Box component={'div'} className='slider'>
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${HomeBg})`, animationDelay: '-0 !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${image1})`, animationDelay: '-2s !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${image2})`, animationDelay: '-4s !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${HomeBg})`, animationDelay: '-6s !important' }} />
+          <Box component={'div'} className={`${classes.homeBanner} slide`} sx={{ background: `url(${image1})`, animationDelay: '-8s !important' }} />
+        </Box>
         <Box component={'div'} className={classes.bannerContainer}>
           <Box className={classes.flexColumn} gap={'48px'}>
             <Box className={classes.flexColumn} gap={'24px'}>
               <Typography className={classes.homeHeading} component={'h6'}>
                 About Ajilda
               </Typography>
-              <Typography variant='mediumThin' lineHeight={'1.5rem'} color={'#fff'}>
+              <Typography variant='mediumThin' lineHeight={'25px'} color={'#fff'}>
                 Lorem ipsum dolor sit amet consectetur. Id ultrices lacus quam malesuada scelerisque iaculis lacus. Faucibus semper lacus lorem euismod nulla lorem est. Pellentesque ipsum ac scelerisque laoreet consequat. Amet risus volutpat sapien.
               </Typography>
             </Box>
-            <Button variant='contained' color='primary' sx={{ maxWidth: '280px' }} endIcon={<ArrowForwardIcon />}>
+            <Button
+              variant='contained'
+              color='primary'
+              sx={{ maxWidth: '280px' }}
+              endIcon={<ArrowForwardIcon />}
+              onClick={() => {
+                navigate(`/${routes.product}`);
+              }}>
               Explore our products
             </Button>
           </Box>
@@ -68,15 +93,15 @@ const About = () => {
         <Box component={'img'} src={soldBanner} alt='banner' sx={{ width: '100%', height: '750px', objectFit: 'cover' }} />
         <Box component={'div'} sx={{ padding: '120px', background: '#EEE8E6' }}>
           <Box component={'div'} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', gap: '80px' }}>
-            {[1, 2, 3, 4].map((items, index) => {
+            {content.map((items, index) => {
               return (
                 <Box key={index} component={'div'} className={classes.flexCenter} gap={'80px'}>
                   <Box component={'div'} className={classes.flexColumn} alignItems={'center'} gap={'16px'}>
                     <Typography className={classes.soldBannerHeading} component={'h6'}>
-                      12
+                      {items.count}
                     </Typography>
                     <Typography variant='mediumThin' color={'#1C2409'} component={'h6'}>
-                      Products sold
+                      {items.achivements}
                     </Typography>
                   </Box>
                   {index !== 3 && <Box component={'div'} sx={{ height: '140px', width: '1px', background: '#B89354' }} />}

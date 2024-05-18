@@ -36,4 +36,9 @@ export const useStyles = makeStyles(() => ({
       fontFamily: 'Inter',
     },
   },
+  offerBg: {
+    width: '100%',
+    padding: '6px',
+    background: '#D32F2F',
+  },
 }));

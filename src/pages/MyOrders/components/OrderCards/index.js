@@ -2,7 +2,6 @@ import { Box, Button, Rating, Typography } from '@mui/material';
 import React from 'react';
 import Product from '../../../../assets/Images/Product.jfif';
 import { useStyles } from '../../styles';
-import CloseIcon from '@mui/icons-material/Close';
 import { tabStateLabel } from '../..';
 
 const OrderCards = (props) => {
@@ -39,7 +38,7 @@ const OrderCards = (props) => {
       case tabStateLabel[0]:
         return (
           <Box component={'div'} className={`${classes.flexColumn} ${classes.actionContainer}`}>
-            <Button variant='contained' color='info' className='custom-btn' fullWidth startIcon={<CloseIcon />}>
+            <Button variant='contained' color='info' className='custom-btn' fullWidth>
               Cancel order
             </Button>
             <Typography variant='smallThin' color={'#6B6B6B'} component={'h6'}>

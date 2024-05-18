@@ -17,7 +17,7 @@ const Footer = () => {
   ];
 
   return (
-    <Box component={'section'} bgcolor={'#F5F8EE'}>
+    <Box component={'section'} bgcolor={'#F5F8EE'} borderTop={'1px solid #E8E8E8'}>
       <Box component={'div'} className={classes.padding100}>
         <Box component={'img'} src={logo} className={classes.logoStyles} />
         <Box component={'div'} display={'flex'} gap={'150px'}>

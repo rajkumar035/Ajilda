@@ -4,10 +4,11 @@ export const useStyles = makeStyles(() => ({
   homeBanner: {
     height: '80vh',
     width: '100%',
-    objectFit: 'cover',
     position: 'absolute',
     zIndex: '-1',
-    transform: 'scaleX(-1)',
+    backgroundSize: 'cover !important',
+    backgroundPosition: 'center !important',
+    backgroundRepeat: 'no-repeat !important',
   },
   homeHeading: {
     fontSize: '54px !important',

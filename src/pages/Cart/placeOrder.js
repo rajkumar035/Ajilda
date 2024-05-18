@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, TextField, Button, Divider } from '@mui/material';
 import placeOrder1 from "../../assets/SVG's/placeOrder1.jpeg";
 import placeOrder2 from "../../assets/SVG's/placeOrder2.jpeg";
@@ -39,7 +39,10 @@ const PlaceOrder = () => {
           }}
         />
         <h4>
-          Having an account? <a style={{ color: '#56642E' }}>Login</a>
+          Having an account?{' '}
+          <a href='/' style={{ color: '#56642E' }}>
+            Login
+          </a>
         </h4>
         <h4 style={{ marginTop: '80px' }}>Billing Information</h4>
         <Grid container>

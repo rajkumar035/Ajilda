@@ -117,7 +117,7 @@ title {
   }
 }
 
-.MuiStepConnector-line {
+/* .MuiStepConnector-line {
   display: block;
   border-color: #000000;
   border-top-style: solid;
@@ -126,4 +126,22 @@ title {
   padding: 14px 17px 1px 12px;
   position: absolute;
   margin: 0px -13px -20px -21px;
+} */
+
+.productCard_btn {
+  padding-left: 70px !important;
+  transition: 0.8s ease-in-out !important;
+}
+
+.productCard_btn_icon {
+  opacity: 0 !important;
+  transition: 0.5s ease-in-out;
+}
+
+.productCard_btn:hover {
+  padding-left: 0px !important;
+}
+
+.productCard_btn:hover .productCard_btn_icon {
+  opacity: 1 !important;
 }

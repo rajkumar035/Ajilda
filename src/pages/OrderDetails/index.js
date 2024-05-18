@@ -1,5 +1,5 @@
-import { Box, Grid, Step, StepConnector, StepContent, StepLabel, Stepper, Typography, stepConnectorClasses } from '@mui/material';
-import React, { useState } from 'react';
+import { Box, Grid, Step, StepConnector, StepLabel, Stepper, Typography, stepConnectorClasses } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import OrderCards from '../MyOrders/components/OrderCards';
 import { useLocation } from 'react-router-dom';
 import { useStyles } from './styles';
@@ -11,6 +11,10 @@ const OrderDetails = () => {
   const classes = useStyles();
 
   const [stepperState, setStepperState] = useState(1);
+
+  useEffect(() => {
+    setStepperState(1);
+  }, []);
 
   const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.active}`]: {
