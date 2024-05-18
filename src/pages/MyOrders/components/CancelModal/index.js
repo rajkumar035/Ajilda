@@ -2,9 +2,12 @@ import React from 'react';
 import { useStyles } from '../../styles';
 import { Box, IconButton, Typography } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { useNavigate } from 'react-router-dom';
+import routes from '../../../../utils/routes.json';
 
 const CancelModal = () => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const reason = ['Found this product at a better price', 'Item no longer needed', 'Ordered by mistake', 'Delivery taking too long'];
 
   return (
@@ -24,7 +27,10 @@ const CancelModal = () => {
               <Typography variant='mediumThin' component={'h6'} color={'#0F1405'}>
                 {items}
               </Typography>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  navigate(`/${routes.response}?message=${encodeURIComponent('Order Cancelled')}&desc=${encodeURIComponent('Any amount withdrawn will be debited to your account within 3 business days.')}`);
+                }}>
                 <KeyboardArrowRightIcon />
               </IconButton>
             </Box>

@@ -187,7 +187,7 @@ const Home = () => {
       </Box>
 
       {/* Best Seller */}
-      <Box component={'section'} position={'relative'} gap={'180px'} className={`${classes.flexColumn} ${classes.padding100}`}>
+      <Box component={'section'} position={'relative'} gap={'140px'} className={`${classes.flexColumn} ${classes.padding100}`}>
         <Box component={'div'} className={classes.flexColumn} gap={'60px'}>
           <Typography className={classes.containerHeading}>Our Best Sellers</Typography>
           <Grid container width={'100%'} spacing={4}>

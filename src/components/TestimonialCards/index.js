@@ -44,6 +44,7 @@ const useStyles = makeStyles(() => ({
     position: 'absolute',
     background: `#fff`,
     width: '100%',
+    height: '100%',
     borderRadius: '12px',
     border: '2px solid rgba(0, 0, 0, 0.2)',
     left: '-400px',

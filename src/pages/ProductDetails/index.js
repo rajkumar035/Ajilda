@@ -30,6 +30,7 @@ import { makeStyles } from '@mui/styles';
 import Divider from '@mui/material/Divider';
 import ProductCard from '../../components/ProductCard';
 import Footer from '../../components/Footer';
+import HomeBg from '../../assets/Images/Home.jfif';
 
 const useStyles = makeStyles((theme) => ({
   selected: {
@@ -116,6 +117,42 @@ const ProductDetails = () => {
   // mui stepper start
   const currentStepIndex = steps.findIndex((step) => step === product?.whenToUse?.tag);
   // end
+
+  const productList = [
+    {
+      img: HomeBg,
+      title: 'Goat Milk Soap',
+      description: 'Transformational treatments with dermo-purifying',
+      offer: 12,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 349.0,
+      status: 'Best seller',
+      category: 'Body',
+      condition: 'Oily Skin',
+    },
+    {
+      img: HomeBg,
+      title: 'Shampoo',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 12,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 499.0,
+      status: 'Most Searched',
+      category: 'Hair',
+    },
+    {
+      img: HomeBg,
+      title: 'Hair Serum',
+      description: 'Transformational treatments with dermo-purifying blends',
+      offer: 8,
+      reviews: [{ title: 'Check', Author: 'Check' }],
+      rating: '4.5',
+      actualPrice: 699.0,
+      category: 'Hair',
+    },
+  ];
 
   const handleIncrement = () => {
     setCount((prevCount) => prevCount + 1);
@@ -529,10 +566,10 @@ const ProductDetails = () => {
             <p style={{ color: '#676C5A' }}>Get better results with our other bestsellers</p>
           </center>
           <Grid container width={'100%'} spacing={4}>
-            {[1, 2, 3].map((items, index) => {
+            {productList.map((items, index) => {
               return (
                 <Grid item lg={4} md={2} sm={1} key={index}>
-                  <ProductCard />
+                  <ProductCard {...items} />
                 </Grid>
               );
             })}

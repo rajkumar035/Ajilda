@@ -106,10 +106,12 @@ const ProductCard = (props) => {
         </Box>
         <Button
           onClick={() => {
-            navigate(`/${routes.productDetails}/${encodeURIComponent(title).toLowerCase()}`);
+            if (status !== 'Sold out') {
+              navigate(`/${routes.productDetails}/${encodeURIComponent(title).toLowerCase()}`);
+            }
           }}
           sx={{ padding: '6px', borderRadius: '6px', cursor: status === 'Sold out' ? 'no-drop' : 'pointer' }}
-          className='productCard_btn'
+          className={'productCard_btn'}
           variant='contained'
           color='primary'
           fullWidth
