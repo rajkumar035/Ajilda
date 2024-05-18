@@ -1,21 +1,30 @@
 import { Box, Grid, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
 import DeliveryAddress from './components/DeliveryAddress';
 import ProfileDetails from './components/ProfileDetails';
 import { MyOrdersComponent } from '../MyOrders';
+import { useSearchParams } from 'react-router-dom';
 
 const Profile = () => {
   const classes = useStyles();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const getTabState = searchParams.get('state');
   const TabStates = {
-    Profile: 'Profile',
-    Orders: 'Orders',
-    Address: 'Address',
+    Profile: 'profile',
+    Orders: 'orders',
+    Address: 'address',
   };
-  const [tabState, setTabState] = useState(TabStates.Profile);
+
+  const [tabState, setTabState] = useState();
+
+  useEffect(() => {
+    setTabState(getTabState ? getTabState : TabStates.Profile);
+  }, [getTabState]);
 
   const handleTabState = (value) => {
     setTabState(value);
+    setSearchParams({ state: value });
   };
 
   const CustomTab = ({ value, children }) => {
@@ -39,7 +48,7 @@ const Profile = () => {
       case TabStates.Profile:
         return <ProfileDetails />;
       case TabStates.Orders:
-        return <MyOrdersComponent />;
+        return <MyOrdersComponent navigateLink={true} />;
       case TabStates.Address:
         return <DeliveryAddress />;
       default:

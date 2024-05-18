@@ -54,63 +54,27 @@ const Contact = () => {
                   fullWidth
                   label='Full name'
                   InputLabelProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
+                    classes: { root: classes.inputLabel },
                   }}
-                  inputProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
-                  }}
+                  className={classes.inputStyles}
                 />
                 <TextField
                   variant='standard'
                   fullWidth
                   label='Phone number'
                   InputLabelProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
+                    classes: { root: classes.inputLabel },
                   }}
-                  inputProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
-                  }}
+                  className={classes.inputStyles}
                 />
                 <TextField
                   variant='standard'
                   fullWidth
                   label='Email'
                   InputLabelProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
+                    classes: { root: classes.inputLabel },
                   }}
-                  inputProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
-                  }}
+                  className={classes.inputStyles}
                 />
                 <TextField
                   variant='standard'
@@ -119,21 +83,9 @@ const Contact = () => {
                   fullWidth
                   label='Hello I would like to know about...'
                   InputLabelProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
+                    classes: { root: classes.inputLabel },
                   }}
-                  inputProps={{
-                    style: {
-                      fontSize: '16px',
-                      fontWeight: '400',
-                      color: '#49503A',
-                      paddingBottom: '16px',
-                    },
-                  }}
+                  className={classes.inputStyles}
                 />
                 <Button fullWidth variant='contained' color='secondary' sx={{ padding: '9px' }} endIcon={<EastIcon />}>
                   Send now

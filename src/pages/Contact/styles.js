@@ -47,4 +47,18 @@ export const useStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  inputStyles: {
+    '& .MuiTextField-root': {
+      fontSize: '16px',
+      fontWeight: '400',
+      color: '#49503A',
+      paddingBottom: '16px',
+      borderRadius: '8px',
+    },
+  },
+  inputLabel: {
+    fontSize: '16px !important',
+    fontWeight: '400 !important',
+    color: '#49503A !important',
+  },
 }));

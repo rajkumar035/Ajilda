@@ -50,7 +50,7 @@ const Header = () => {
             <IconButton
               className={classes.iconButton}
               onClick={() => {
-                navigate(routes.profile);
+                navigate(`/${routes.profile}?state=profile`);
               }}>
               <PersonOutlinedIcon sx={{ height: '16px', width: '16px', color: '#424C23' }} />
             </IconButton>
