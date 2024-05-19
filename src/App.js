@@ -10,6 +10,8 @@ import { Box } from '@mui/material';
 import Header from './components/Header';
 import GoogleAuthProvider from './context/GoogleAuthProvider';
 import PlaceOrder from './pages/Cart/placeOrder';
+import PaymentOption from './pages/Cart/PaymentOption';
+import PaymentSuccessful from './pages/Cart/PaymentSuccessful';
 
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));
@@ -52,6 +54,8 @@ function App() {
                 <Route caseSensitive path={`/${routes.productDetails}/:product_id`} element={<ProductDetails />} />
                 <Route caseSensitive path={routes.cart} element={<Cart />} />
                 <Route caseSensitive path={`${routes.cart}/place-order`} element={<PlaceOrder />} />
+                <Route caseSensitive path={`${routes.cart}/payment-option`} element={<PaymentOption />} />
+                <Route caseSensitive path={`${routes.cart}/payment-successfully`} element={<PaymentSuccessful />} />
                 <Route caseSensitive path={routes.checkout} element={<Checkout />} />
                 <Route caseSensitive path={routes.profile} element={<MyProfile />} />
                 <Route caseSensitive path={routes.orders} element={<MyOrders />} />
