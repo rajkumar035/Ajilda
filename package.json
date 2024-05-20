@@ -10,6 +10,8 @@
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.15",
     "@mui/styles": "^5.15.15",
+    "dotenv": "^16.4.5",
+    "firebase": "^10.12.0",
     "moment": "^2.30.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
