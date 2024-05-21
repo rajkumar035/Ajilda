@@ -4,7 +4,7 @@ import EastIcon from "@mui/icons-material/East";
 import { makeStyles } from "@mui/styles";
 import bottomLeft from "../../assets/PNG's/4041.png";
 import topRight from "../../assets/PNG's/4042.png";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   center: {
     display: "flex",
@@ -20,13 +20,13 @@ const useStyles = makeStyles((theme) => ({
     color: "#C3A570",
     fontSize: "120px",
     margin: "0px",
-    fontFamily:"DM Serif Display;"
+    fontFamily: "DM Serif Display;",
   },
   content: {
     color: "#192108",
-    fontSize:"18px",
-    width:"20%",
-    margin:"0px 0px 40px 0px"
+    fontSize: "18px",
+    width: "20%",
+    margin: "0px 0px 40px 0px",
   },
   topRightImage: {
     position: "absolute",
@@ -49,24 +49,16 @@ const NotFound = () => {
   const classes = useStyles();
   return (
     <div className={classes.center}>
-      <img
-        src={topRight}
-        alt="Top Right Decoration"
-        className={classes.topRightImage}
-      />
-      <img
-        src={bottomLeft}
-        alt="Bottom Left Decoration"
-        className={classes.bottomLeftImage}
-      />
+      <img src={topRight} alt="Top Right Decoration" className={classes.topRightImage} />
+      <img src={bottomLeft} alt="Bottom Left Decoration" className={classes.bottomLeftImage} />
       <h1 className={classes.heading}>404</h1>
-      <h4 className={classes.content}>
-        We are sorry, but the page you requested was not found
-      </h4>
-      <Button variant="contained">
-        Proceed to checkout &nbsp;
-        <EastIcon />
-      </Button>
+      <h4 className={classes.content}>We are sorry, but the page you requested was not found</h4>
+      <Link to={`/Key ingredients`} style={{ textDecoration: "none" }}>
+        <Button variant="contained">
+          Go back home &nbsp;
+          <EastIcon />
+        </Button>
+      </Link>
     </div>
   );
 };

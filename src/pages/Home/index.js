@@ -202,7 +202,7 @@ const Home = () => {
         </Box>
         <Box component={'div'} className={classes.flexColumn} gap={'60px'}>
           <Typography className={classes.containerHeading} component={'h6'}>
-            Shop by skin concern /categories
+            Shop by skin concern/categories
           </Typography>
           <Grid container spacing={3} height={'75vh'}>
             <Grid item lg={4} md={6} sm={12}>
@@ -226,20 +226,20 @@ const Home = () => {
         </Box>
         <Box component={'div'} className={classes.cardContainer}>
           <Box component={'div'} className={classes.flexColumn} gap={'35px'}>
-            <Typography component={'h6'} className={classes.cardContainerHeading} color={'#1C2409'}>
+            <Typography component={'h6'} className={classes.cardContainerHeading} lineHeight={"35px !important"} color={'#1C2409'}>
               Make your skin better with
               <Typography component={'span'} className={classes.cardContainerHeading} color={'#56642E'}>
                 Ajilda
               </Typography>
             </Typography>
-            <Typography component={'h6'} variant='largeRegular' color={'#393939'} lineHeight={'33px'}>
+            <Typography component={'h6'} variant='largeRegular' style={{fontSize:"18px"}} color={'#393939'} lineHeight={'33px'}>
               Lorem ipsum dolor sit amet consectetur. Morbi habitant volutpat sed curabitur gravida quis platea ac. Non ullamcorper sit egestas metus. Quam quam aliquam risus tristique.Lorem ipsum dolor sit amet consectetur. Morbi habitant volutpat sed curabitur gravida quis platea ac. Non
               ullamcorper sit egestas metus. Quam quam aliquam risus tristique.
             </Typography>
             <Button
               variant='contained'
               color='primary'
-              sx={{ maxWidth: '280px' }}
+              sx={{ maxWidth: '280px' ,marginTop:1.5}}
               onClick={() => {
                 navigate(`/${routes.product}`);
               }}>

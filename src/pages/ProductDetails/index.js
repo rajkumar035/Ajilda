@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tags: {
     backgroundColor: "#E0E8CA",
-    padding: "10px 18px 10px 18px",
+    padding: "6px 18px 6px 18px",
     borderRadius: 30,
     marginRight: 10,
   },
@@ -71,10 +71,10 @@ const useStyles = makeStyles((theme) => ({
   },
   newPrice: {
     fontWeight: 600,
-    fontSize: 20,
+    fontSize: 27,
   },
   oldPrice: {
-    fontSize: 16,
+    fontSize: 22,
     color: "#6B6B6B",
     paddingLeft: 10,
     paddingTop: 3,
@@ -209,7 +209,7 @@ const ProductDetails = () => {
               <img src={selectedImage} alt="Check" className={classes.largeImage} />
             </div>
           </Grid>
-          <Grid item xs={12} md={6} sm={12} lg={6} style={{ height: "90vh", overflow: "scroll" }}>
+          <Grid item xs={12} md={6} sm={12} lg={6} style={{ height: "70vh", overflow: "scroll" }}>
             {/* Product Name and tags*/}
             <Grid container>
               <Grid item>
@@ -251,22 +251,22 @@ const ProductDetails = () => {
               </Grid>
             </Grid>
             {/* Pricing */}
-            <Grid container alignItems="center">
+            <Grid container alignItems="center" style={{marginTop:"25px"}}>
               <Grid item className={classes.newPrice}>
                 ₹{product?.product?.price?.newprice}
               </Grid>
               <Grid item className={classes.oldPrice}>
                 <del>₹ {product?.product?.price?.oldprice}</del>
               </Grid>
-              <Grid item style={{ color: "#C02B2B" }}>
-                <b>{percentageDiscount.toFixed(2)}% off</b>
+              <Grid item >
+                <b style={{ color: "#C02B2B" ,fontSize:20}}>{parseInt(percentageDiscount.toFixed(2))}% off</b>
               </Grid>
             </Grid>
-            <Grid>
-              <p>{"(MRP Inclusive of all Taxes)"}</p>
+            <Grid style={{marginTop:3}}>
+            {"(MRP Inclusive of all Taxes)"}
             </Grid>
             {/* description */}
-            <Grid>{product?.product?.description}</Grid>
+            <Grid style={{marginTop:"45px"}}>{product?.product?.description}</Grid>
             {/* highlight */}
             <Grid style={{ marginTop: 20 }}>
               {highlight.map((item, index) => (
@@ -279,7 +279,7 @@ const ProductDetails = () => {
               ))}
             </Grid>
             {/* Quantity Selector */}
-            <Grid container style={{ marginTop: 3 }} alignItems="center" spacing={2}>
+            <Grid container style={{ marginTop: 15 }} alignItems="center" spacing={2}>
               <div
                 style={{
                   display: "flex",
@@ -314,6 +314,12 @@ const ProductDetails = () => {
               style={{ width: "60%", marginTop: 20 }}
               variant="outlined"
               placeholder="Enter Pin code to check delivery"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '12px',
+                  // height:50
+                },
+              }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -325,10 +331,11 @@ const ProductDetails = () => {
                     <Button style={{ color: "#56642E", fontWeight: "600" }}>Check</Button>
                   </InputAdornment>
                 ),
+                
               }}
             />
             {/* Clinic Tested */}
-            <Grid container style={{ marginTop: 30, fontSize: 14 }}>
+            <Grid container style={{ marginTop: 50, fontSize: 14 }}>
               <Grid item>
                 <center>
                   <img src={image1} alt="Clinic Tested" width="50" />
@@ -352,7 +359,7 @@ const ProductDetails = () => {
               </Grid>
             </Grid>
             {/* When to use?*/}
-            <Grid style={{ marginTop: 30 }}>
+            <Grid style={{ marginTop: 50 }}>
               <h4>When to use?</h4>
               <p>{product?.whenToUse?.description}</p>
               <Stepper style={{ padding: "50px" }} activeStep={1} alternativeLabel>
@@ -554,6 +561,7 @@ const ProductDetails = () => {
                 "&.Mui-selected": {
                   bgcolor: "rgb(142, 166, 76)",
                   borderRadius: "0px",
+                  color:"white"
                 },
                 "&.Mui-selected:hover": {
                   bgcolor: "rgb(142, 166, 76)",
@@ -562,6 +570,7 @@ const ProductDetails = () => {
                 "&:not(.Mui-selected)": {
                   border: "1px solid rgb(142, 166, 76)",
                   borderRadius: "0px",
+                  color:"#6F813C"
                 },
               }}
             />
