@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Typography, TextField, Button, Divider } from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import AddIcon from "@mui/icons-material/Add";
@@ -6,6 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import EastIcon from "@mui/icons-material/East";
 import { Link } from "react-router-dom";
 import cart from "../../assets/SVG's/cart.png";
+import { getData } from "../../utils/services";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([
@@ -74,7 +75,7 @@ const Cart = () => {
       setCouponApplied(true);
     } else {
       setCouponApplied(false);
-      alert("Applied Coupon is not found")
+      alert("Applied Coupon is not found");
     }
   };
 
@@ -82,6 +83,16 @@ const Cart = () => {
   const discount = calculateDiscount();
   const couponDiscount = couponApplied ? 100 : 0;
   const total = subtotal - discount - couponDiscount;
+
+  useEffect(() => {
+    getData("orders")
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <Grid container sx={{ padding: "60px 100px" }} spacing={2}>

@@ -32,6 +32,7 @@ import Divider from "@mui/material/Divider";
 import ProductCard from "../../components/ProductCard";
 import Footer from "../../components/Footer";
 import HomeBg from "../../assets/Images/Home.jfif";
+import { addData } from "../../utils/services";
 
 const useStyles = makeStyles((theme) => ({
   selected: {
@@ -193,6 +194,18 @@ const ProductDetails = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
+  const addProductToCartCart = () => {
+    addData("orders", { product: "1jTiGyxpNqElwE5PI1Ru", quantity: count })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  console.log(product, "56y56y56u56u");
+
   const currentPeople = people.slice(startIndex, endIndex);
   // testimonia end
   return (
@@ -251,22 +264,20 @@ const ProductDetails = () => {
               </Grid>
             </Grid>
             {/* Pricing */}
-            <Grid container alignItems="center" style={{marginTop:"25px"}}>
+            <Grid container alignItems="center" style={{ marginTop: "25px" }}>
               <Grid item className={classes.newPrice}>
                 ₹{product?.product?.price?.newprice}
               </Grid>
               <Grid item className={classes.oldPrice}>
                 <del>₹ {product?.product?.price?.oldprice}</del>
               </Grid>
-              <Grid item >
-                <b style={{ color: "#C02B2B" ,fontSize:20}}>{parseInt(percentageDiscount.toFixed(2))}% off</b>
+              <Grid item>
+                <b style={{ color: "#C02B2B", fontSize: 20 }}>{parseInt(percentageDiscount.toFixed(2))}% off</b>
               </Grid>
             </Grid>
-            <Grid style={{marginTop:3}}>
-            {"(MRP Inclusive of all Taxes)"}
-            </Grid>
+            <Grid style={{ marginTop: 3 }}>{"(MRP Inclusive of all Taxes)"}</Grid>
             {/* description */}
-            <Grid style={{marginTop:"45px"}}>{product?.product?.description}</Grid>
+            <Grid style={{ marginTop: "45px" }}>{product?.product?.description}</Grid>
             {/* highlight */}
             <Grid style={{ marginTop: 20 }}>
               {highlight.map((item, index) => (
@@ -304,9 +315,14 @@ const ProductDetails = () => {
                 </Grid>
               </div>
               <Grid item>
-                <Link to={`/cart`} style={{ textDecoration: "none" }}>
-                  <button className={classes.button}>Add to cart</button>
-                </Link>
+                <button
+                  onClick={() => {
+                    addProductToCartCart();
+                  }}
+                  className={classes.button}
+                >
+                  Add to cart
+                </button>
               </Grid>
             </Grid>
             {/* Delivery Check Input */}
@@ -315,8 +331,8 @@ const ProductDetails = () => {
               variant="outlined"
               placeholder="Enter Pin code to check delivery"
               sx={{
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: '12px',
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: "12px",
                   // height:50
                 },
               }}
@@ -331,7 +347,6 @@ const ProductDetails = () => {
                     <Button style={{ color: "#56642E", fontWeight: "600" }}>Check</Button>
                   </InputAdornment>
                 ),
-                
               }}
             />
             {/* Clinic Tested */}
@@ -561,7 +576,7 @@ const ProductDetails = () => {
                 "&.Mui-selected": {
                   bgcolor: "rgb(142, 166, 76)",
                   borderRadius: "0px",
-                  color:"white"
+                  color: "white",
                 },
                 "&.Mui-selected:hover": {
                   bgcolor: "rgb(142, 166, 76)",
@@ -570,7 +585,7 @@ const ProductDetails = () => {
                 "&:not(.Mui-selected)": {
                   border: "1px solid rgb(142, 166, 76)",
                   borderRadius: "0px",
-                  color:"#6F813C"
+                  color: "#6F813C",
                 },
               }}
             />
