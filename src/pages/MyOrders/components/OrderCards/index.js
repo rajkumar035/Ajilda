@@ -1,6 +1,6 @@
 import { Box, Dialog, Rating, Typography } from '@mui/material';
 import React, { useState } from 'react';
-import Product from '../../../../assets/Images/Product.jfif';
+import Product from '../../../../asset/Images/Product.jfif';
 import { useStyles } from '../../styles';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../../utils/routes.json';

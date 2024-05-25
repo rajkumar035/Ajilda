@@ -1,24 +1,24 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useStyles } from './styles';
-import HomeBg from '../../assets/Images/Home.jfif';
+import HomeBg from '../../asset/Images/Home.jfif';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import LeafLeft from "../../assets/PNG's/leaftLeft.png";
-import LeafRight from "../../assets/PNG's/leaftRight.png";
-import ContentBg from '../../assets/Images/contentBg.jpg';
-import Delivery from '../../assets/Icons/delivery.png';
-import Star from '../../assets/Icons/star.png';
-import Results from '../../assets/Icons/results.png';
+import LeafLeft from "../../asset/PNG's/leaftLeft.png";
+import LeafRight from "../../asset/PNG's/leaftRight.png";
+import ContentBg from '../../asset/Images/contentBg.jpg';
+import Delivery from '../../asset/Icons/delivery.png';
+import Star from '../../asset/Icons/star.png';
+import Results from '../../asset/Icons/results.png';
 import ProductCard from '../../components/ProductCard';
 import CategoryCards from './components/CategoryCards';
-import Better from "../../assets/PNG's/better.png";
+import Better from "../../asset/PNG's/better.png";
 import TestimonialCards from '../../components/TestimonialCards';
 import DeliverCards from './components/DeliverCards';
 import Contact from '../Contact';
 import routes from '../../utils/routes.json';
 import Footer from '../../components/Footer';
-import image1 from '../../assets/Images/location1.png';
-import image2 from '../../assets/Images/location2.png';
+import image1 from '../../asset/Images/location1.png';
+import image2 from '../../asset/Images/location2.png';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
@@ -226,20 +226,20 @@ const Home = () => {
         </Box>
         <Box component={'div'} className={classes.cardContainer}>
           <Box component={'div'} className={classes.flexColumn} gap={'35px'}>
-            <Typography component={'h6'} className={classes.cardContainerHeading} lineHeight={"35px !important"} color={'#1C2409'}>
+            <Typography component={'h6'} className={classes.cardContainerHeading} lineHeight={'35px !important'} color={'#1C2409'}>
               Make your skin better with
               <Typography component={'span'} className={classes.cardContainerHeading} color={'#56642E'}>
                 Ajilda
               </Typography>
             </Typography>
-            <Typography component={'h6'} variant='largeRegular' style={{fontSize:"18px"}} color={'#393939'} lineHeight={'33px'}>
+            <Typography component={'h6'} variant='largeRegular' style={{ fontSize: '18px' }} color={'#393939'} lineHeight={'33px'}>
               Lorem ipsum dolor sit amet consectetur. Morbi habitant volutpat sed curabitur gravida quis platea ac. Non ullamcorper sit egestas metus. Quam quam aliquam risus tristique.Lorem ipsum dolor sit amet consectetur. Morbi habitant volutpat sed curabitur gravida quis platea ac. Non
               ullamcorper sit egestas metus. Quam quam aliquam risus tristique.
             </Typography>
             <Button
               variant='contained'
               color='primary'
-              sx={{ maxWidth: '280px' ,marginTop:1.5}}
+              sx={{ maxWidth: '280px', marginTop: 1.5 }}
               onClick={() => {
                 navigate(`/${routes.product}`);
               }}>

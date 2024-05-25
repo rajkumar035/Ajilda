@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import staticBg from "../../assets/PNG's/SttaicBG.png";
+import staticBg from "../../asset/PNG's/SttaicBG.png";
 
 export const useStyles = makeStyles((theme) => ({
   homeBanner: {

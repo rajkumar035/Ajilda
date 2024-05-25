@@ -2,7 +2,7 @@ import React from 'react';
 import { useStyles } from './styles';
 import { Box, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import logo from "../../assets/PNG's/logo.png";
+import logo from "../../asset/PNG's/logo.png";
 
 const Footer = () => {
   const classes = useStyles();

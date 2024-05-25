@@ -2,11 +2,11 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import { useStyles } from '../../styles';
-import category1 from '../../../../assets/Images/category1.jfif';
-import category2 from '../../../../assets/Images/category2.jfif';
-import category3 from '../../../../assets/Images/category3.png';
-import category4 from '../../../../assets/Images/category4.png';
-import category5 from '../../../../assets/Images/category5.jfif';
+import category1 from '../../../../asset/Images/category1.jfif';
+import category2 from '../../../../asset/Images/category2.jfif';
+import category3 from '../../../../asset/Images/category3.png';
+import category4 from '../../../../asset/Images/category4.png';
+import category5 from '../../../../asset/Images/category5.jfif';
 import { useNavigate } from 'react-router-dom';
 import routes from '../../../../utils/routes.json';
 

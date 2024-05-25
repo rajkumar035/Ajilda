@@ -2,12 +2,12 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useStyles } from '../../styles';
 import { styled } from '@mui/styles';
-import flag from "../../../../assets/PNG's/flag.png";
-import location1 from '../../../../assets/Images/location1.png';
-import location2 from '../../../../assets/Images/location2.png';
-import location3 from '../../../../assets/Images/location3.png';
-import location4 from '../../../../assets/Images/location4.png';
-import location5 from '../../../../assets/Images/location5.png';
+import flag from "../../../../asset/PNG's/flag.png";
+import location1 from '../../../../asset/Images/location1.png';
+import location2 from '../../../../asset/Images/location2.png';
+import location3 from '../../../../asset/Images/location3.png';
+import location4 from '../../../../asset/Images/location4.png';
+import location5 from '../../../../asset/Images/location5.png';
 
 const DeliverCards = (props) => {
   const classes = useStyles();

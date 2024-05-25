@@ -3,7 +3,7 @@ import React from 'react';
 import EastIcon from '@mui/icons-material/East';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import routes from '../../utils/routes.json';
-import success from '../../assets/Images/success.jpg';
+import success from '../../asset/Images/success.jpg';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({

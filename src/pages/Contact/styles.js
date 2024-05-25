@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import ContactBg from "../../assets/PNG's/ContactBg.png";
+import ContactBg from "../../asset/PNG's/ContactBg.png";
 
 export const useStyles = makeStyles(() => ({
   contactBgStyles: {

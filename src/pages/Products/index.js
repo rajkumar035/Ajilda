@@ -1,7 +1,7 @@
 import { Box, Chip, Grid, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useStyles } from './styles';
-import Home from '../../assets/Images/Home.jfif';
+import Home from '../../asset/Images/Home.jfif';
 import ProductCard from '../../components/ProductCard';
 import Footer from '../../components/Footer';
 import { useSearchParams } from 'react-router-dom';

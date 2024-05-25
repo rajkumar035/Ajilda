@@ -1,11 +1,11 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
-import Success from '../../assets/Icons/successCircle.png';
+import Success from '../../asset/Icons/successCircle.png';
 import { makeStyles, styled } from '@mui/styles';
-import Testimonial1 from "../../assets/PNG's/Testimonials.png";
-import Testimonial2 from '../../assets/Images/testimonial2.png';
-import Testimonial3 from '../../assets/Images/testimonial3.png';
+import Testimonial1 from "../../asset/PNG's/Testimonials.png";
+import Testimonial2 from '../../asset/Images/testimonial2.png';
+import Testimonial3 from '../../asset/Images/testimonial3.png';
 
 const useStyles = makeStyles(() => ({
   cardBody: {
