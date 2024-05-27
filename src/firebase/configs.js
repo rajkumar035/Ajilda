@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { GoogleAuthProvider } from 'firebase/auth/web-extension';
+import { GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAilu2pC59GpwyWULvSpgoTLKtroui0JxE',
   authDomain: 'ajilda-cosmetics.firebaseapp.com',
@@ -16,4 +16,3 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
-export const storageBucket = getStorage(app);

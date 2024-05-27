@@ -1,3 +1,5 @@
+import { Navigate } from 'react-router-dom';
+import { UseUserContext } from '../context/GoogleAuthProvider';
 import routes from './routes.json';
 
 export const getTabText = (pathName) => {
@@ -28,4 +30,9 @@ export const getTabText = (pathName) => {
 
 export const shrinkTextBased = (limit = 0, text = '') => {
   return text.length > limit ? `${text.substring(0, limit)}...` : text;
+};
+
+export const ProtectedRoute = ({ children }) => {
+  const data = UseUserContext();
+  return data ? children : <Navigate to={routes.home} />;
 };

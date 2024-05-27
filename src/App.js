@@ -4,7 +4,7 @@ import routes from './utils/routes.json';
 import Loader from './components/Loader';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ErrorBoundary as ErrorBoundarySuspense } from 'react-error-boundary';
-import { getTabText } from './utils/helperFunctions';
+import { ProtectedRoute, getTabText } from './utils/helperFunctions';
 import ReactThemeProvider from './context/ThemeProvider';
 import { Box } from '@mui/material';
 import Header from './components/Header';
@@ -57,7 +57,15 @@ function App() {
                 <Route caseSensitive path={`${routes.cart}/payment-option`} element={<PaymentOption />} />
                 <Route caseSensitive path={`${routes.cart}/payment-successfully`} element={<PaymentSuccessful />} />
                 <Route caseSensitive path={routes.checkout} element={<Checkout />} />
-                <Route caseSensitive path={routes.profile} element={<MyProfile />} />
+                <Route
+                  caseSensitive
+                  path={routes.profile}
+                  element={
+                    <ProtectedRoute>
+                      <MyProfile />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route caseSensitive path={routes.orders} element={<MyOrders />} />
                 <Route caseSensitive path={`/${routes.orderDetails}/:order_id`} element={<OrderDetails />} />
                 <Route caseSensitive path={routes.response} element={<Response />} />
