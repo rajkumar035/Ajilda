@@ -21,7 +21,7 @@ const Cart = () => {
     {
       product: 'Product Name',
       quantitySize: '150ml',
-      price: '₹90',
+      price: '₹900',
       discountedPrice: '₹99',
       quantity: 1,
       delete: false,
