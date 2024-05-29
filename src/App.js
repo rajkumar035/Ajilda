@@ -35,6 +35,8 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  console.clear();
+
   return (
     <ErrorBoundarySuspense
       onReset={() => {
