@@ -1,5 +1,5 @@
-import { db } from "../firebase/configs";
-import { getDocs, collection, getDoc, doc, addDoc } from "firebase/firestore";
+import { db } from '../firebase/configs';
+import { getDocs, collection, getDoc, doc, addDoc } from 'firebase/firestore';
 
 export const getData = async (table) => {
   const collectionRef = collection(db, table);
@@ -26,7 +26,8 @@ export const getDocument = async (table, documentId) => {
 export const addData = async (table, data) => {
   const dataRef = collection(db, table);
   try {
-    await addDoc(dataRef, data);
+    const response = await addDoc(dataRef, data);
+    return response;
   } catch (err) {
     return err;
   }

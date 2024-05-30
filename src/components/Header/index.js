@@ -1,5 +1,5 @@
-import { Badge, Box, IconButton, Typography, Dialog } from '@mui/material';
-import React, { useState } from 'react';
+import { Badge, Box, IconButton, Typography, Dialog, Alert } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import logo from "../../asset/PNG's/logo.png";
 import { useStyles } from './styles';
@@ -13,6 +13,8 @@ import { UseUserContext } from '../../context/GoogleAuthProvider';
 import { RecaptchaVerifier, signInWithPhoneNumber, signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../../firebase/configs';
 import VerifyOTP from '../VerifyOTP';
+import Register from '../Register';
+import { addData, getData } from '../../utils/services';
 
 const Header = () => {
   const classes = useStyles();
@@ -22,7 +24,12 @@ const Header = () => {
 
   const [loginModal, setLoginModal] = useState(false);
   const [verifyModal, setVerifyModal] = useState(false);
-  const [signUpModal, setSignUpModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(true);
+  const [alert, setAlert] = useState({
+    severity: null,
+    open: false,
+    message: null,
+  });
   const [user, setUser] = useState();
   const [sender, setSender] = useState();
 
@@ -81,8 +88,57 @@ const Header = () => {
     }
   };
 
+  const handleUserRegistration = async (formData) => {
+    const data = await getData('users');
+
+    const phoneNumberExist =
+      data?.filter((items) => {
+        return items.phoneNumber === formData?.phoneNumber;
+      }) || [];
+
+    if (phoneNumberExist.length > 0) {
+      setAlert({ open: true, message: 'Phone number already exist, Try sign in!', severity: 'error' });
+      setTimeout(() => {
+        handleSignUpModal();
+        handleLoginModal();
+      }, [1000]);
+      return;
+    }
+
+    await addData('users', formData)
+      .then(async (res) => {
+        if (res.id) {
+          const recaptcha = new RecaptchaVerifier(auth, 'recaptcha', {});
+          const confirmationOtp = await signInWithPhoneNumber(auth, formData.phoneNumber, recaptcha);
+          if (confirmationOtp.verificationId) {
+            setSender(formData.phoneNumber);
+            setUser(confirmationOtp);
+            handleSignUpModal();
+            handleVerifyModal();
+          }
+        } else {
+          setAlert({ open: true, message: 'Something went wrong!', severity: 'error' });
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setAlert({ open: true, message: 'Something went wrong!', severity: 'error' });
+      });
+  };
+
   return (
     <>
+      {alert.open && (
+        <Alert
+          variant='filled'
+          severity={alert.severity}
+          style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: '9999999999' }}
+          onClose={() => {
+            setAlert({ open: false, message: null, severity: null });
+          }}>
+          {alert.message}
+        </Alert>
+      )}
       <Dialog
         PaperProps={{
           style: {
@@ -108,6 +164,19 @@ const Header = () => {
           handleVerifyModal();
         }}>
         <VerifyOTP sender={sender} verifyOtp={verifyOtp} handleLoginModal={handleLoginModal} handleVerifyModal={handleVerifyModal} />
+      </Dialog>
+      <Dialog
+        PaperProps={{
+          style: {
+            minWidth: '420px',
+            padding: '40px 50px',
+          },
+        }}
+        open={signUpModal}
+        onClose={() => {
+          handleSignUpModal();
+        }}>
+        <Register handleUserRegistration={handleUserRegistration} />
       </Dialog>
       <Box component={'nav'} width={'100%'}>
         <Box component={'div'} className={classes.offerBg}>
@@ -135,6 +204,7 @@ const Header = () => {
               src={logo}
               className={`cursor-pointer ${classes.logoStyles}`}
               onClick={() => {
+                // signOut(auth);
                 navigate(routes.home);
               }}
             />
