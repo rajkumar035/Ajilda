@@ -32,3 +32,23 @@ export const addData = async (table, data) => {
     return err;
   }
 };
+
+export const addProduct = async (table, data) => {
+  const dataRef = collection(db, table);
+  try {
+    const response = await addDoc(dataRef, data);
+    return response;
+  } catch (err) {
+    return err;
+  }
+};
+
+export const getProduct = async (table, documentId) => {
+  const documentRef = doc(db, table, documentId);
+  try {
+    const data = await getDoc(documentRef);
+    return data.exists() ? { ...data.data(), info: { id: data.id, uid: table } } : null;
+  } catch (err) {
+    return err;
+  }
+};
