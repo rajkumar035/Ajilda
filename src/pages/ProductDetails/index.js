@@ -32,7 +32,7 @@ import Divider from "@mui/material/Divider";
 import ProductCard from "../../components/ProductCard";
 import Footer from "../../components/Footer";
 import HomeBg from "../../asset/Images/Home.jfif";
-import { addData, addProduct ,getProduct} from "../../utils/services";
+import { addData ,getProduct} from "../../utils/services";
 
 const useStyles = makeStyles((theme) => ({
   selected: {
@@ -111,7 +111,7 @@ const ProductDetails = () => {
   const [ratingValue, setRatingValue] = useState(4.5);
   const classes = useStyles();
   useEffect(() => {
-    const documentId = "n2GYrFgiKlHTKt0k4Cak";
+    const documentId = "4Sw3WXsv2CyLEuRiPHjn";
     getProduct('products', documentId)
       .then((res) => {
         console.log(res, "Product Data");
@@ -143,6 +143,7 @@ const ProductDetails = () => {
   const newPrice = parseFloat(product?.product?.price?.newprice);
   const percentageDiscount = ((oldPrice - newPrice) / oldPrice) * 100;
   const steps = ["Cleanser", "Serum", "Night Cream", "Toner", "Moisturizer"];
+  console.log(product?.whenToUse?.tag,"product?.whenToUse?.tag");
   const currentStepIndex = steps.findIndex((step) => step === product?.whenToUse?.tag);
   const productList = [
     {
@@ -208,15 +209,6 @@ const ProductDetails = () => {
       });
   };
 
-  const addProductToDB = () => {
-    addProduct("products", product)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
 
   return(
     <div>
@@ -332,11 +324,6 @@ const ProductDetails = () => {
                   className={classes.button}
                 >
                   Add to cart
-                </button>
-              </Grid>
-              <Grid item>
-                <button onClick={addProductToDB} className={classes.button}>
-                  Add product to DB
                 </button>
               </Grid>
             </Grid>
