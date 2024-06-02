@@ -200,7 +200,7 @@ const ProductDetails = () => {
   const currentPeople = people.slice(startIndex, endIndex);
 
   const addProductToCartCart = () => {
-    addData("orders", { product: "1jTiGyxpNqElwE5PI1Ru", quantity: count })
+    addData("orders", { product: "n2GYrFgiKlHTKt0k4Cak", quantity: count })
       .then((res) => {
         console.log(res);
       })
