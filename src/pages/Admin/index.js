@@ -5,6 +5,8 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddProduct from "./Addproduct/Addproduct";
+import Dashboard from "./Dashboard/Dashboard";
+import Users from "./Users/User";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -50,10 +52,10 @@ function Admin() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Dashboard
+       <Dashboard/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        User's
+       <Users/>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <AddProduct />
