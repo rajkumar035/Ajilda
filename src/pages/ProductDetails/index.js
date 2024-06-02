@@ -111,7 +111,7 @@ const ProductDetails = () => {
   const [ratingValue, setRatingValue] = useState(4.5);
   const classes = useStyles();
   useEffect(() => {
-    const documentId = "4Sw3WXsv2CyLEuRiPHjn";
+    const documentId = "n2GYrFgiKlHTKt0k4Cak";
     getProduct('products', documentId)
       .then((res) => {
         console.log(res, "Product Data");
