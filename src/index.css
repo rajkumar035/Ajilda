@@ -145,3 +145,10 @@ title {
 .productCard_btn:hover .productCard_btn_icon {
   opacity: 1 !important;
 }
+
+.custom-alert {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999999;
+}

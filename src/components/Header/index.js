@@ -1,5 +1,5 @@
-import { Badge, Box, IconButton, Typography, Dialog, Alert } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Badge, Box, IconButton, Typography, Dialog } from "@mui/material";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import logo from "../../asset/PNG's/logo.png";
 import { useStyles } from "./styles";
@@ -9,32 +9,28 @@ import { useNavigate } from "react-router-dom";
 import routes from "../../utils/routes.json";
 import { Link } from "react-router-dom";
 import Login from "../Login";
-import { UseUserContext } from "../../context/GoogleAuthProvider";
+import { useAuthContext } from "../../context/AuthProvider";
 import { RecaptchaVerifier, deleteUser, signInWithPhoneNumber, signInWithPopup, signOut } from "firebase/auth";
-import { auth, provider } from "../../firebase/configs";
+import { auth, collections, provider } from "../../firebase/configs";
 import VerifyOTP from "../VerifyOTP";
 import Register from "../Register";
 import { addData, getData } from "../../utils/services";
+import { useSnackbarContext } from "../../context/SnackbarProvider";
 
 const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const data = UseUserContext();
+  const { authData, dispatchAuthData } = useAuthContext();
+  const { dispatchSnackbarData } = useSnackbarContext();
   const products = ["Bath & Body", "Face", "Hair Care", "Combos", "Gifts"];
 
-  const [loginModal, setLoginModal] = useState(false);
   const [verifyModal, setVerifyModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
-  const [alert, setAlert] = useState({
-    severity: null,
-    open: false,
-    message: null,
-  });
   const [user, setUser] = useState();
   const [sender, setSender] = useState();
 
   const handleLoginModal = () => {
-    setLoginModal(!loginModal);
+    dispatchAuthData({ action: "LOGIN_MODAL" });
   };
 
   const handleSignUpModal = () => {
@@ -46,7 +42,7 @@ const Header = () => {
   };
 
   const handleLogin = () => {
-    if (data && data?.accessToken) {
+    if (authData?.userData && authData?.userData?.accessToken) {
       navigate(`/${routes.profile}?state=profile`);
     } else {
       handleLoginModal();
@@ -55,7 +51,7 @@ const Header = () => {
 
   const handleSignIn = async () => {
     try {
-      const data = await getData("users");
+      const data = await getData(collections.USERS);
       const result = await signInWithPopup(auth, provider);
       const currentEmail = result.user.email;
 
@@ -64,7 +60,7 @@ const Header = () => {
       if (emailExists.length === 0) {
         await deleteUser(auth.currentUser);
         await signOut(auth);
-        setAlert({ message: "User not found, Please signup!", severity: "error", open: true });
+        dispatchSnackbarData({ action: "UPDATE", payload: { message: "User not found, Please signup!", severity: "error", open: true } });
         setTimeout(() => {
           handleLoginModal();
           handleSignUpModal();
@@ -72,14 +68,15 @@ const Header = () => {
         return;
       }
     } catch (err) {
-      setAlert({ message: "Something went wrong!", severity: "error", open: true });
+      dispatchSnackbarData({ action: "UPDATE", payload: { message: "Something went wrong!", severity: "error", open: true } });
       console.error(err);
     }
   };
 
-  const sendOtp = async (mobile) => {
+  const sendOtp = async (formData) => {
     try {
-      const data = await getData("users");
+      const mobile = formData?.mobilePhone.replace(/\s/g, "") || "";
+      const data = await getData(collections.USERS);
 
       const phoneNumberExist =
         data?.filter((items) => {
@@ -87,7 +84,7 @@ const Header = () => {
         }) || [];
 
       if (phoneNumberExist.length === 0) {
-        setAlert({ open: true, message: "User not found, Please signup !", severity: "error" });
+        dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "User not found, Please signup !", severity: "error" } });
         setTimeout(() => {
           handleLoginModal();
           handleSignUpModal();
@@ -104,7 +101,7 @@ const Header = () => {
         handleVerifyModal();
       }
     } catch (err) {
-      setAlert({ message: "Something went wrong!", severity: "error", open: true });
+      dispatchSnackbarData({ action: "UPDATE", payload: { message: "Something went wrong!", severity: "error", open: true } });
       console.error(err);
     }
   };
@@ -116,13 +113,13 @@ const Header = () => {
         handleVerifyModal();
       }
     } catch (err) {
-      setAlert({ message: "Something went wrong!", severity: "error", open: true });
+      dispatchSnackbarData({ action: "UPDATE", payload: { message: "Something went wrong!", severity: "error", open: true } });
       console.error(err);
     }
   };
 
   const handleUserRegistration = async (formData) => {
-    const data = await getData("users");
+    const data = await getData(collections.USERS);
 
     const phoneNumberExist =
       data?.filter((items) => {
@@ -130,7 +127,7 @@ const Header = () => {
       }) || [];
 
     if (phoneNumberExist.length > 0) {
-      setAlert({ open: true, message: "Phone number already exist, Try sign in!", severity: "error" });
+      dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Phone number already exist, Try sign in!", severity: "error" } });
       setTimeout(() => {
         handleSignUpModal();
         handleLoginModal();
@@ -138,7 +135,7 @@ const Header = () => {
       return;
     }
 
-    await addData("users", formData)
+    await addData(collections.USERS, formData)
       .then(async (res) => {
         if (res.id) {
           const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
@@ -150,29 +147,17 @@ const Header = () => {
             handleVerifyModal();
           }
         } else {
-          setAlert({ open: true, message: "Something went wrong!", severity: "error" });
+          dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
         }
       })
       .catch((err) => {
         console.error(err);
-        setAlert({ open: true, message: "Something went wrong!", severity: "error" });
+        dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
       });
   };
 
   return (
     <>
-      {alert.open && (
-        <Alert
-          variant="filled"
-          severity={alert.severity}
-          style={{ position: "absolute", bottom: "20px", left: "20px", zIndex: "9999999999" }}
-          onClose={() => {
-            setAlert({ open: false, message: null, severity: null });
-          }}
-        >
-          {alert.message}
-        </Alert>
-      )}
       <Dialog
         PaperProps={{
           style: {
@@ -180,7 +165,7 @@ const Header = () => {
             padding: "50px 60px",
           },
         }}
-        open={loginModal}
+        open={authData?.loginModal}
         onClose={() => {
           handleLoginModal();
         }}

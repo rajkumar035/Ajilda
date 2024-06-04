@@ -1,5 +1,5 @@
-import { db } from '../firebase/configs';
-import { getDocs, collection, getDoc, doc, addDoc } from 'firebase/firestore';
+import { db } from "../firebase/configs";
+import { getDocs, collection, getDoc, doc, addDoc, deleteDoc } from "firebase/firestore";
 
 export const getData = async (table) => {
   const collectionRef = collection(db, table);
@@ -33,21 +33,10 @@ export const addData = async (table, data) => {
   }
 };
 
-export const addProduct = async (table, data) => {
-  const dataRef = collection(db, table);
+export const deleteData = async (table, documentId) => {
+  const dataRef = doc(db, table, documentId);
   try {
-    const response = await addDoc(dataRef, data);
-    return response;
-  } catch (err) {
-    return err;
-  }
-};
-
-export const getProduct = async (table, documentId) => {
-  const documentRef = doc(db, table, documentId);
-  try {
-    const data = await getDoc(documentRef);
-    return data.exists() ? { ...data.data(), info: { id: data.id, uid: table } } : null;
+    await deleteDoc(dataRef);
   } catch (err) {
     return err;
   }

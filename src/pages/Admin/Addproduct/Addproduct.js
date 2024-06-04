@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Grid, Button, TextField, Typography, Box, IconButton } from "@mui/material";
-import { addProduct } from "../../../utils/services";
 import { makeStyles } from "@mui/styles";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { collections } from "../../../firebase/configs";
+import { addData } from "../../../utils/services";
 
 const useStyles = makeStyles(() => ({
   button: {
@@ -95,7 +96,7 @@ const AddProduct = () => {
   };
 
   const handleAddProductToDB = () => {
-    addProduct("products", productData)
+    addData(collections.PRODUCTS, productData)
       .then((res) => {
         console.log(res);
       })

@@ -1,59 +1,59 @@
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
-import React from 'react';
-import { useStyles } from '../../styles';
-import { Controller, useForm, useFormContext } from 'react-hook-form';
-import { UseUserContext } from '../../../../context/GoogleAuthProvider';
+import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import React from "react";
+import { useStyles } from "../../styles";
+import { Controller, useForm } from "react-hook-form";
+import { useAuthContext } from "../../../../context/AuthProvider";
 
 const ProfileDetails = () => {
   const classes = useStyles();
-  const data = UseUserContext();
+  const data = useAuthContext();
 
   const { control } = useForm({
     defaultValues: {
       fullName: data?.displayName,
       phoneNumber: data?.phoneNumber,
-      gender: '',
+      gender: "",
       email: data?.email,
     },
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   return (
-    <Box component={'div'} className={classes.flexColumn} gap={'30px'}>
-      <Typography variant='mediumRegular' color={'#0F1405'} component={'h6'}>
+    <Box component={"div"} className={classes.flexColumn} gap={"30px"}>
+      <Typography variant="mediumRegular" color={"#0F1405"} component={"h6"}>
         Personal Information
       </Typography>
       <Grid container spacing={3}>
         <Grid item lg={3} md={6} sm={12}>
           <Controller
-            name='fullName'
+            name="fullName"
             control={control}
             render={({ field }) => {
-              return <TextField variant='outlined' label={'Full name'} fullWidth {...field} />;
+              return <TextField variant="outlined" label={"Full name"} fullWidth {...field} />;
             }}
           />
         </Grid>
         <Grid item lg={3} md={6} sm={12}>
           <Controller
-            name='phoneNumber'
+            name="phoneNumber"
             control={control}
             render={({ field }) => {
-              return <TextField variant='outlined' label={'Phone number'} fullWidth {...field} />;
+              return <TextField variant="outlined" label={"Phone number"} fullWidth {...field} />;
             }}
           />
         </Grid>
         <Grid item lg={3} md={6} sm={12}>
           <Controller
-            name='gender'
+            name="gender"
             control={control}
             render={({ field }) => {
               return (
                 <FormControl fullWidth>
                   <InputLabel>Gender</InputLabel>
-                  <Select label={'Gender'} fullWidth {...field}>
-                    <MenuItem value={'Male'}>Male</MenuItem>
-                    <MenuItem value={'Female'}>Female</MenuItem>
-                    <MenuItem value={'Not to disclose'}>Not to disclose</MenuItem>
+                  <Select label={"Gender"} fullWidth {...field}>
+                    <MenuItem value={"Male"}>Male</MenuItem>
+                    <MenuItem value={"Female"}>Female</MenuItem>
+                    <MenuItem value={"Not to disclose"}>Not to disclose</MenuItem>
                   </Select>
                 </FormControl>
               );
@@ -62,10 +62,10 @@ const ProfileDetails = () => {
         </Grid>
         <Grid item lg={3} md={6} sm={12}>
           <Controller
-            name='email'
+            name="email"
             control={control}
             render={({ field }) => {
-              return <TextField variant='outlined' label={'Email'} value={field.value} fullWidth />;
+              return <TextField variant="outlined" label={"Email"} value={field.value} fullWidth />;
             }}
           />
         </Grid>

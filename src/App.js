@@ -8,10 +8,11 @@ import { ProtectedRoute, getTabText } from "./utils/helperFunctions";
 import ReactThemeProvider from "./context/ThemeProvider";
 import { Box } from "@mui/material";
 import Header from "./components/Header";
-import GoogleAuthProvider from "./context/GoogleAuthProvider";
 import PlaceOrder from "./pages/Cart/placeOrder";
 import PaymentOption from "./pages/Cart/PaymentOption";
 import PaymentSuccessful from "./pages/Cart/PaymentSuccessful";
+import AuthProvider from "./context/AuthProvider";
+import SnackbarProvider from "./context/SnackbarProvider";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Admin = React.lazy(() => import("./pages/Admin"));
@@ -36,52 +37,116 @@ function App() {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-  console.clear();
-
   return (
-    <ErrorBoundarySuspense
-      onReset={() => {
-        return window.location.reload;
-      }}
-      FallbackComponent={<ErrorBoundary />}
-    >
-      <ReactThemeProvider>
-        <GoogleAuthProvider>
-          <Box component={"article"}>
-            <Header />
-            <React.Suspense fallback={<Loader />}>
-              <Routes>
-                <Route caseSensitive path={routes.Admin} element={<Admin />} />
-                <Route caseSensitive path={routes.home} index element={<Home />} />
-                <Route caseSensitive path={routes.about} element={<About />} />
-                <Route caseSensitive path={routes.faq} element={<Faq />} />
-                <Route caseSensitive path={routes.product} element={<Products />} />
-                <Route caseSensitive path={`/${routes.productDetails}/:product_id`} element={<ProductDetails />} />
-                <Route caseSensitive path={routes.cart} element={<Cart />} />
-                <Route caseSensitive path={`${routes.cart}/place-order`} element={<PlaceOrder />} />
-                <Route caseSensitive path={`${routes.cart}/payment-option`} element={<PaymentOption />} />
-                <Route caseSensitive path={`${routes.cart}/payment-successfully`} element={<PaymentSuccessful />} />
-                <Route caseSensitive path={routes.checkout} element={<Checkout />} />
-                <Route
-                  caseSensitive
-                  path={routes.profile}
-                  element={
-                    <ProtectedRoute>
-                      <MyProfile />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route caseSensitive path={routes.orders} element={<MyOrders />} />
-                <Route caseSensitive path={`/${routes.orderDetails}/:order_id`} element={<OrderDetails />} />
-                <Route caseSensitive path={routes.response} element={<Response />} />
-                <Route caseSensitive path={routes.notFound} element={<NotFound />} />
-                <Route />
-              </Routes>
-            </React.Suspense>
-          </Box>
-        </GoogleAuthProvider>
-      </ReactThemeProvider>
-    </ErrorBoundarySuspense>
+    <SnackbarProvider>
+      <AuthProvider>
+        <ErrorBoundarySuspense
+          onReset={() => {
+            return window.location.reload;
+          }}
+          FallbackComponent={<ErrorBoundary />}
+        >
+          <ReactThemeProvider>
+            <Box component={"article"}>
+              <Header />
+              <React.Suspense fallback={<Loader />}>
+                <Routes>
+                  <Route caseSensitive path={routes.home} index element={<Home />} />
+                  <Route caseSensitive path={routes.about} element={<About />} />
+                  <Route caseSensitive path={routes.faq} element={<Faq />} />
+                  <Route caseSensitive path={routes.product} element={<Products />} />
+                  <Route caseSensitive path={`/${routes.productDetails}/:product_id`} element={<ProductDetails />} />
+                  <Route caseSensitive path={routes.response} element={<Response />} />
+                  <Route caseSensitive path={routes.notFound} element={<NotFound />} />
+                  <Route
+                    caseSensitive
+                    path={routes.Admin}
+                    element={
+                      <ProtectedRoute>
+                        <Admin />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={routes.cart}
+                    element={
+                      <ProtectedRoute>
+                        <Cart />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={`${routes.cart}/place-order`}
+                    element={
+                      <ProtectedRoute>
+                        <PlaceOrder />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={`${routes.cart}/payment-option`}
+                    element={
+                      <ProtectedRoute>
+                        <PaymentOption />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={`${routes.cart}/payment-successfully`}
+                    element={
+                      <ProtectedRoute>
+                        <PaymentSuccessful />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={routes.checkout}
+                    element={
+                      <ProtectedRoute>
+                        <Checkout />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={routes.profile}
+                    element={
+                      <ProtectedRoute>
+                        <MyProfile />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={routes.orders}
+                    element={
+                      <ProtectedRoute>
+                        <MyOrders />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route
+                    caseSensitive
+                    path={`/${routes.orderDetails}/:order_id`}
+                    element={
+                      <ProtectedRoute>
+                        <OrderDetails />
+                      </ProtectedRoute>
+                    }
+                  />
+                  <Route />
+                </Routes>
+              </React.Suspense>
+            </Box>
+          </ReactThemeProvider>
+        </ErrorBoundarySuspense>
+      </AuthProvider>
+    </SnackbarProvider>
   );
 }
 
