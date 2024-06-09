@@ -1,22 +1,13 @@
 import { Box, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import React from "react";
 import { useStyles } from "../../styles";
-import { Controller, useForm } from "react-hook-form";
-import { useAuthContext } from "../../../../context/AuthProvider";
+import { Controller, useFormContext } from "react-hook-form";
+import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
+import { CONSTANTS } from "../../../../firebase/configs";
 
 const ProfileDetails = () => {
   const classes = useStyles();
-  const data = useAuthContext();
-
-  const { control } = useForm({
-    defaultValues: {
-      fullName: data?.displayName,
-      phoneNumber: data?.phoneNumber,
-      gender: "",
-      email: data?.email,
-    },
-    mode: "onChange",
-  });
+  const { control } = useFormContext();
 
   return (
     <Box component={"div"} className={classes.flexColumn} gap={"30px"}>
@@ -28,8 +19,18 @@ const ProfileDetails = () => {
           <Controller
             name="fullName"
             control={control}
-            render={({ field }) => {
-              return <TextField variant="outlined" label={"Full name"} fullWidth {...field} />;
+            rules={{
+              minLength: {
+                value: 10,
+                message: "Full name should be greater than 10 characters",
+              },
+              maxLength: {
+                value: 40,
+                message: "Full name should be lesser than 40 characters",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => {
+              return <TextField variant="outlined" InputLabelProps={{ className: classes.inputLabel }} label={"Full name"} fullWidth {...field} helperText={error?.message} error={error?.message} />;
             }}
           />
         </Grid>
@@ -37,8 +38,13 @@ const ProfileDetails = () => {
           <Controller
             name="phoneNumber"
             control={control}
-            render={({ field }) => {
-              return <TextField variant="outlined" label={"Phone number"} fullWidth {...field} />;
+            rules={{
+              validate: (value) => {
+                return matchIsValidTel(value) || "Please enter a valid phone number";
+              },
+            }}
+            render={({ field, fieldState: { error } }) => {
+              return <MuiTelInput defaultCountry={"IN"} InputLabelProps={{ className: classes.inputLabel }} label={"Phone number"} {...field} style={{ width: "100%" }} helperText={error?.message} error={error?.message} />;
             }}
           />
         </Grid>
@@ -49,7 +55,7 @@ const ProfileDetails = () => {
             render={({ field }) => {
               return (
                 <FormControl fullWidth>
-                  <InputLabel>Gender</InputLabel>
+                  <InputLabel className={classes.inputLabel}>Gender</InputLabel>
                   <Select label={"Gender"} fullWidth {...field}>
                     <MenuItem value={"Male"}>Male</MenuItem>
                     <MenuItem value={"Female"}>Female</MenuItem>
@@ -64,8 +70,14 @@ const ProfileDetails = () => {
           <Controller
             name="email"
             control={control}
-            render={({ field }) => {
-              return <TextField variant="outlined" label={"Email"} value={field.value} fullWidth />;
+            rules={{
+              pattern: {
+                value: CONSTANTS.EMAIL_VALIDATION,
+                message: "Please enter a valid email",
+              },
+            }}
+            render={({ field, fieldState: { error } }) => {
+              return <TextField variant="outlined" label={"Email"} InputLabelProps={{ className: classes.inputLabel }} value={field.value} {...field} fullWidth helperText={error?.message} error={error?.message} />;
             }}
           />
         </Grid>

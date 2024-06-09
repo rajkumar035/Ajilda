@@ -12,7 +12,8 @@ import Loader from "../../components/Loader";
 
 const Cart = () => {
   const {
-    authData: { userData },
+    authData: { userData, cartData },
+    dispatchAuthData,
   } = useAuthContext();
   const [cartItems, setCartItems] = useState([]);
   const [loader, setLoader] = useState(false);
@@ -22,6 +23,7 @@ const Cart = () => {
 
   const handleDelete = async (data) => {
     await deleteData(data.uid, data.id);
+    dispatchAuthData({ action: "CART_TRIGGER" });
     setTrigger(trigger + 1);
   };
 
@@ -46,40 +48,37 @@ const Cart = () => {
     }
   };
 
-  const getCarts = async (userId) => {
-    const carts = [];
-    setLoader(true);
-    const orders = await getData(collections.ORDERS);
-    const products = await getData(collections.PRODUCTS);
+  useEffect(() => {
+    const getCarts = async () => {
+      const carts = [];
+      setLoader(true);
+      const orders = cartData;
+      const products = await getData(collections.PRODUCTS);
 
-    if (orders.length > 0 && products.length > 0) {
-      for (let i = 0; i < orders.length; i++) {
-        const orderData = orders[i];
-        for (let j = 0; j < products.length; j++) {
-          const productData = products[j];
-          if (orderData?.product === productData?.info?.id && orderData?.user === userId) {
-            carts.push({
-              ...orderData,
-              product: productData?.product?.name,
-              quantitySize: "150ml",
-              price: `₹${productData?.product?.price?.newprice}`,
-              discountedPrice: `₹${productData?.product?.price?.oldprice}`,
-              img: productData?.product?.image[0],
-            });
+      if (orders.length > 0 && products.length > 0) {
+        for (let i = 0; i < orders.length; i++) {
+          const orderData = orders[i];
+          for (let j = 0; j < products.length; j++) {
+            const productData = products[j];
+            if (orderData?.product === productData?.info?.id) {
+              carts.push({
+                ...orderData,
+                product: productData?.product?.name,
+                quantitySize: "150ml",
+                price: `₹${productData?.product?.price?.newprice}`,
+                discountedPrice: `₹${productData?.product?.price?.oldprice}`,
+                img: productData?.product?.image[0],
+              });
+            }
           }
         }
       }
-    }
-    setCartItems(carts);
-    setLoader(false);
-  };
+      setCartItems(carts);
+      setLoader(false);
+    };
 
-  useEffect(() => {
-    const userId = userData?.uid;
-    if (userId) {
-      getCarts(userId);
-    }
-  }, [userData, trigger]);
+    getCarts();
+  }, [userData, trigger, cartData]);
 
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => {

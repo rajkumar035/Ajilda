@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 // import product from "./product.json";
 import Grid from "@mui/material/Grid";
 import Rating from "@mui/material/Rating";
-import { Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import DoneIcon from "@mui/icons-material/Done";
@@ -32,7 +31,7 @@ import Divider from "@mui/material/Divider";
 import ProductCard from "../../components/ProductCard";
 import Footer from "../../components/Footer";
 import HomeBg from "../../asset/Images/Home.jfif";
-import { addData, getDocument, getProduct } from "../../utils/services";
+import { addData, getDocument } from "../../utils/services";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useSnackbarContext } from "../../context/SnackbarProvider";
@@ -200,8 +199,9 @@ const ProductDetails = () => {
       dispatchAuthData({ action: "LOGIN_MODAL" });
     } else {
       setLoader(true);
-      addData(collections.ORDERS, { product: "n2GYrFgiKlHTKt0k4Cak", quantity: count, user: authData?.userData?.uid })
-        .then((res) => {
+      addData(collections.ORDERS, { product: "n2GYrFgiKlHTKt0k4Cak", quantity: count }, authData?.userData?.uid)
+        .then(() => {
+          dispatchAuthData({ action: "CART_TRIGGER" });
           dispatchSnackbarData({ action: "UPDATE", payload: { message: "Order added to cart!", severity: "success", open: true } });
           setLoader(false);
         })

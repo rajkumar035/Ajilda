@@ -123,7 +123,7 @@ const Register = (props) => {
             return <MuiTelInput defaultCountry={"IN"} InputLabelProps={{ style: { color: "#56642E" } }} label={"Phone number"} {...field} className={classes.inputStyles} helperText={error?.message} error={error?.message} />;
           }}
         />
-        <Box component={"div"} className={classes.flexCenter} justifyContent={"space-between"} gap={"px"} width={"100%"}>
+        <Box component={"div"} className={classes.flexCenter} justifyContent={"space-between"} gap={"8px"} width={"100%"}>
           <Box
             component={"div"}
             className={`${classes.cells} ${gender === "Male" ? classes.selectCell : classes.unSelectedCell}`}

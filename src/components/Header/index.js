@@ -21,6 +21,7 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const { authData, dispatchAuthData } = useAuthContext();
+  const { cartData } = authData;
   const { dispatchSnackbarData } = useSnackbarContext();
   const products = ["Bath & Body", "Face", "Hair Care", "Combos", "Gifts"];
 
@@ -28,6 +29,7 @@ const Header = () => {
   const [signUpModal, setSignUpModal] = useState(false);
   const [user, setUser] = useState();
   const [sender, setSender] = useState();
+  const [userFormData, setUserFormData] = useState();
 
   const handleLoginModal = () => {
     dispatchAuthData({ action: "LOGIN_MODAL" });
@@ -51,7 +53,7 @@ const Header = () => {
 
   const handleSignIn = async () => {
     try {
-      const data = await getData(collections.USERS);
+      const data = await getData(collections.USERLIST);
       const result = await signInWithPopup(auth, provider);
       const currentEmail = result.user.email;
 
@@ -75,8 +77,8 @@ const Header = () => {
 
   const sendOtp = async (formData) => {
     try {
-      const mobile = formData?.mobilePhone.replace(/\s/g, "") || "";
-      const data = await getData(collections.USERS);
+      const mobile = formData?.mobilePhone;
+      const data = await getData(collections.USERLIST);
 
       const phoneNumberExist =
         data?.filter((items) => {
@@ -106,20 +108,8 @@ const Header = () => {
     }
   };
 
-  const verifyOtp = async (otp) => {
-    try {
-      const verified = await user.confirm(otp);
-      if (verified.user) {
-        handleVerifyModal();
-      }
-    } catch (err) {
-      dispatchSnackbarData({ action: "UPDATE", payload: { message: "Something went wrong!", severity: "error", open: true } });
-      console.error(err);
-    }
-  };
-
   const handleUserRegistration = async (formData) => {
-    const data = await getData(collections.USERS);
+    const data = await getData(collections.USERLIST);
 
     const phoneNumberExist =
       data?.filter((items) => {
@@ -135,25 +125,45 @@ const Header = () => {
       return;
     }
 
-    await addData(collections.USERS, formData)
-      .then(async (res) => {
-        if (res.id) {
-          const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
-          const confirmationOtp = await signInWithPhoneNumber(auth, formData.phoneNumber, recaptcha);
-          if (confirmationOtp.verificationId) {
-            setSender(formData.phoneNumber);
-            setUser(confirmationOtp);
-            handleSignUpModal();
-            handleVerifyModal();
-          }
-        } else {
-          dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
+    const recaptcha = new RecaptchaVerifier(auth, "recaptcha", {});
+    const confirmationOtp = await signInWithPhoneNumber(auth, formData.phoneNumber, recaptcha);
+    if (confirmationOtp.verificationId) {
+      setSender(formData.phoneNumber);
+      setUser(confirmationOtp);
+      setUserFormData(formData);
+      handleSignUpModal();
+      handleVerifyModal();
+    }
+  };
+
+  const verifyOtp = async (otp) => {
+    try {
+      const verified = await user.confirm(otp);
+      if (verified.user) {
+        // If signup flow appears after verification only need to add the user
+        if (userFormData && verified.user?.uid) {
+          await addData(collections.USERLIST, userFormData)
+            .then(async (res) => {
+              await addData(collections.PROFILE, { ...userFormData, id: res.id }, verified.user.uid)
+                .then(() => {
+                  setUserFormData(null);
+                  dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "User added successfully!", severity: "success" } });
+                })
+                .catch(() => {
+                  dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
+                });
+            })
+            .catch(() => {
+              dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
+            });
         }
-      })
-      .catch((err) => {
-        console.error(err);
-        dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
-      });
+        handleVerifyModal();
+        dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Login successful!", severity: "success" } });
+      }
+    } catch (err) {
+      dispatchSnackbarData({ action: "UPDATE", payload: { message: "Something went wrong!", severity: "error", open: true } });
+      console.error(err);
+    }
   };
 
   return (
@@ -232,11 +242,13 @@ const Header = () => {
               }}
             />
             <Box component={"div"} className={classes.flexCenter} gap={"36px"}>
-              <Link to={`/cart`} style={{ textDecoration: "none" }}>
-                <Badge color="primary" badgeContent={4} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} className={classes.customBadge}>
-                  <LocalMallOutlinedIcon sx={{ height: "18px", width: "18px" }} />
-                </Badge>
-              </Link>
+              {cartData.length > 0 && (
+                <Link to={`/cart`} style={{ textDecoration: "none" }}>
+                  <Badge color="primary" badgeContent={cartData.length} anchorOrigin={{ vertical: "bottom", horizontal: "right" }} className={classes.customBadge}>
+                    <LocalMallOutlinedIcon sx={{ height: "18px", width: "18px" }} />
+                  </Badge>
+                </Link>
+              )}
               <IconButton
                 className={classes.iconButton}
                 onClick={() => {

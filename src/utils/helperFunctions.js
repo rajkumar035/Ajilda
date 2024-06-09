@@ -1,5 +1,7 @@
 import { Navigate } from "react-router-dom";
 import routes from "./routes.json";
+import { AES, enc } from "crypto-js";
+import { CONSTANTS } from "../firebase/configs";
 
 export const getTabText = (pathName) => {
   const splitName = pathName.split("/");
@@ -33,6 +35,21 @@ export const shrinkTextBased = (limit = 0, text = "") => {
 
 export const ProtectedRoute = ({ children }) => {
   const userData = localStorage.getItem("_user");
-  const data = userData ? JSON.parse(userData) : null;
-  return data ? children : <Navigate to={routes.home} />;
+  const decryptedData = userData ? JSON.parse(AES.decrypt(userData, CONSTANTS.DATA_ENCRYPTION_KEY).toString(enc.Utf8)) : null;
+  return decryptedData && decryptedData.uid ? children : <Navigate to={routes.home} />;
 };
+
+
+export function removeNullKeys(obj) {
+  for (let key in obj) {
+    if (obj[key] === null || obj[key] === undefined) {
+      delete obj[key];
+    } else if (typeof obj[key] === 'object') {
+      removeNullKeys(obj[key]);
+      if (Object.keys(obj[key]).length === 0) {
+        delete obj[key];
+      }
+    }
+  }
+  return obj;
+}

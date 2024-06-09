@@ -21,4 +21,12 @@ export const useStyles = makeStyles(() => ({
     height: '66vh',
     overflow: 'auto',
   },
+  footer: {
+    bottom: "0px",
+    justifyContent: "end",
+    gap: "12px"
+  },
+  inputLabel: {
+    color: "rgba(0, 0, 0, 0.6) !important"
+  }
 }));

@@ -84,7 +84,7 @@ const Login = (props) => {
         >
           <Box component={"img"} src={google} height={"18px"} width={"auto"} />
           <Typography variant="smallRegular" component={"h6"} color={"#56642E"}>
-            Signup with gmail
+            SignIn with gmail
           </Typography>
         </Box>
       </Box>
