@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import Login from "../Login";
 import { useAuthContext } from "../../context/AuthProvider";
 import { RecaptchaVerifier, deleteUser, signInWithPhoneNumber, signInWithPopup, signOut } from "firebase/auth";
-import { auth, collections, provider } from "../../firebase/configs";
+import { ROLES, auth, collections, provider } from "../../firebase/configs";
 import VerifyOTP from "../VerifyOTP";
 import Register from "../Register";
 import { addData, getData } from "../../utils/services";
@@ -142,9 +142,9 @@ const Header = () => {
       if (verified.user) {
         // If signup flow appears after verification only need to add the user
         if (userFormData && verified.user?.uid) {
-          await addData(collections.USERLIST, userFormData)
+          await addData(collections.USERLIST, { ...userFormData, role: ROLES.CUSTOMER, uid: verified.user.uid })
             .then(async (res) => {
-              await addData(collections.PROFILE, { ...userFormData, id: res.id }, verified.user.uid)
+              await addData(collections.PROFILE, { ...userFormData, role: ROLES.CUSTOMER, id: res.id }, verified.user.uid)
                 .then(() => {
                   setUserFormData(null);
                   dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "User added successfully!", severity: "success" } });
@@ -157,6 +157,7 @@ const Header = () => {
               dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Something went wrong!", severity: "error" } });
             });
         }
+
         handleVerifyModal();
         dispatchSnackbarData({ action: "UPDATE", payload: { open: true, message: "Login successful!", severity: "success" } });
       }
@@ -237,8 +238,8 @@ const Header = () => {
               src={logo}
               className={`cursor-pointer ${classes.logoStyles}`}
               onClick={() => {
-                signOut(auth);
-                // navigate(routes.home);
+                // signOut(auth);
+                navigate(routes.home);
               }}
             />
             <Box component={"div"} className={classes.flexCenter} gap={"36px"}>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer, useState } from "react";
-import { CONSTANTS, auth, collections } from "../../firebase/configs";
+import { CONSTANTS, ORDER_STATUS, auth, collections } from "../../firebase/configs";
 import { AES } from "crypto-js";
 import { getData } from "../../utils/services";
 
@@ -9,6 +9,7 @@ const initalState = {
   userData: null,
   loginModal: true,
   cartData: [],
+  orderData: [],
   cartTrigger: 0,
 };
 
@@ -43,9 +44,22 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     setLoader(true);
-    auth.onAuthStateChanged((res) => {
+    auth.onAuthStateChanged(async (res) => {
       if (res?.uid) {
-        dispatchAuthData({ action: "UPDATE", payload: { userData: res, loginModal: false } });
+        const customAuthLogin = { ...res };
+        // Customizing the same UID for 2 different login's
+        const userData = await getData(collections.USERLIST);
+        const getPhoneMatch = userData.find((items) => {
+          return items.phoneNumber?.replace(/\s+/g, "") === res.phoneNumber?.replace(/\s+/g, "");
+        });
+        const getEmailMatch = userData.find((items) => {
+          return items?.email === res?.email;
+        });
+        const role = getPhoneMatch ? getPhoneMatch.role : getEmailMatch ? getEmailMatch.role : null;
+        const uid = getPhoneMatch ? getPhoneMatch.uid : getEmailMatch ? getEmailMatch.uid : customAuthLogin.uid;
+        customAuthLogin["uid"] = uid;
+        customAuthLogin["role"] = role;
+        dispatchAuthData({ action: "UPDATE", payload: { userData: customAuthLogin, loginModal: false } });
       } else {
         dispatchAuthData({ action: "SIGN_OUT" });
       }
@@ -58,10 +72,20 @@ const AuthProvider = ({ children }) => {
       return;
     }
 
+    setLoader(true);
     const getCartData = async () => {
       const orders = await getData(collections.ORDERS, authData.userData.uid);
-      dispatchAuthData({ action: "UPDATE", payload: { cartData: orders } });
+      dispatchAuthData({
+        action: "UPDATE",
+        payload: {
+          orderData: orders,
+          cartData: orders.filter((items) => {
+            return items.status === ORDER_STATUS.ADDED;
+          }),
+        },
+      });
     };
+    setLoader(false);
 
     getCartData();
   }, [authData.userData?.uid, authData.cartTrigger]);

@@ -55,7 +55,7 @@ const Profile = () => {
     if (userData?.uid) {
       setLoading(true);
       if (data?.email && dirtyFields?.email) {
-        const getUserData = getData(collections.USERLIST);
+        const getUserData = await getData(collections.USERLIST);
         const emailExists = getUserData.filter((user) => user.email === data?.email) || [];
 
         if (emailExists.length > 0) {
@@ -127,7 +127,7 @@ const Profile = () => {
       case TabStates.Profile:
         return <ProfileDetails />;
       case TabStates.Orders:
-        return <MyOrdersComponent navigateLink={true} />;
+        return <MyOrdersComponent  />;
       case TabStates.Address:
         return <DeliveryAddress />;
       default:

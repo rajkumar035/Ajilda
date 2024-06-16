@@ -4,19 +4,21 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAilu2pC59GpwyWULvSpgoTLKtroui0JxE",
-  authDomain: "ajilda-cosmetics.firebaseapp.com",
-  projectId: "ajilda-cosmetics",
-  storageBucket: "ajilda-cosmetics.appspot.com",
-  messagingSenderId: "216188587161",
-  appId: "1:216188587161:web:58ff924820280e4d207c08",
+  apiKey: "AIzaSyBILr0jqRhQaFZ2AeEi78hvfNW3GswNRbI",
+  authDomain: "ajilda-cosmetics-35034.firebaseapp.com",
+  projectId: "ajilda-cosmetics-35034",
+  storageBucket: "ajilda-cosmetics-35034.appspot.com",
+  messagingSenderId: "1044016942102",
+  appId: "1:1044016942102:web:0e88dc86160387a02bb937",
+  measurementId: "G-M0KMLGBR8W",
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
-export const razorpay_key = "rzp_test_Iq80oNPkKZdSS5"
+export const razorpay_key = "rzp_test_Iq80oNPkKZdSS5";
+
 export const collections = {
   CART: "cart",
   ORDERS: "orders",
@@ -26,6 +28,20 @@ export const collections = {
   USERLIST: "userlist",
   PROFILE: "profile",
 };
+
+export const ORDER_STATUS = {
+  ADDED: "added",
+  ORDERED: "ordered",
+  DISPATCHED: "dispatched",
+  CANCELLED: "cancelled",
+  DELIVERED: "delivered",
+};
+
+export const ROLES = {
+  CUSTOMER: "CUSTOMER",
+  DELIVERY: "DELIVERY",
+  ADMIN: "ADMIN"
+}
 
 export const CONSTANTS = {
   DATA_ENCRYPTION_KEY: "uih5t8754t776%R%$E$^7437ry347r",

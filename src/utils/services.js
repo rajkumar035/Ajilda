@@ -1,3 +1,4 @@
+import moment from "moment";
 import { collections, db } from "../firebase/configs";
 import { getDocs, collection, getDoc, doc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
 
@@ -47,7 +48,7 @@ export const addData = async (table, data, userId) => {
   }
 
   try {
-    const response = await addDoc(dataRef, data);
+    const response = await addDoc(dataRef, { ...data, createdAt: moment().utc().format() });
     return response;
   } catch (err) {
     return err;
@@ -64,14 +65,21 @@ export const updateData = async (table, data, docId, userId) => {
   }
 
   try {
-    await updateDoc(dataRef, data);
+    await updateDoc(dataRef, { ...data, lastUpdated: moment().utc().format() });
   } catch (err) {
     return err;
   }
 };
 
-export const deleteData = async (table, documentId) => {
-  const dataRef = doc(db, table, documentId);
+export const deleteData = async (table, docId, userId) => {
+  let dataRef = doc(db, table, docId);
+
+  // Querying data based on user
+  if (userId) {
+    const userRef = doc(db, collections.USERS, userId);
+    dataRef = doc(userRef, table, docId);
+  }
+
   try {
     await deleteDoc(dataRef);
   } catch (err) {

@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import routes from "./routes.json";
-import { AES, enc } from "crypto-js";
-import { CONSTANTS } from "../firebase/configs";
+import { ROLES } from "../firebase/configs";
+import { useAuthContext } from "../context/AuthProvider";
 
 export const getTabText = (pathName) => {
   const splitName = pathName.split("/");
@@ -33,18 +33,32 @@ export const shrinkTextBased = (limit = 0, text = "") => {
   return text.length > limit ? `${text.substring(0, limit)}...` : text;
 };
 
-export const ProtectedRoute = ({ children }) => {
-  const userData = localStorage.getItem("_user");
-  const decryptedData = userData ? JSON.parse(AES.decrypt(userData, CONSTANTS.DATA_ENCRYPTION_KEY).toString(enc.Utf8)) : null;
-  return decryptedData && decryptedData.uid ? children : <Navigate to={routes.home} />;
-};
+export const ProtectedRoute = ({ children, role = ROLES.CUSTOMER }) => {
+  const {
+    authData: { userData },
+  } = useAuthContext();
+  if (userData) {
+    // Admin can access every routes
+    if (userData.role === ROLES.ADMIN) {
+      return children;
+    }
 
+    // Other only role based route form the prop
+    if (role === userData.role) {
+      return children;
+    }
+
+    return <Navigate to={routes.home} />;
+  } else {
+    <Navigate to={routes.home} />;
+  }
+};
 
 export function removeNullKeys(obj) {
   for (let key in obj) {
     if (obj[key] === null || obj[key] === undefined) {
       delete obj[key];
-    } else if (typeof obj[key] === 'object') {
+    } else if (typeof obj[key] === "object") {
       removeNullKeys(obj[key]);
       if (Object.keys(obj[key]).length === 0) {
         delete obj[key];

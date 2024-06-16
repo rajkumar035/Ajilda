@@ -13,7 +13,7 @@ import { Controller, useForm, useWatch } from "react-hook-form";
 import { MuiTelInput, matchIsValidTel } from "mui-tel-input";
 import { City, Country, State } from "country-state-city";
 import { useSnackbarContext } from "../../context/SnackbarProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import routes from "../../utils/routes.json";
 
 const useStyles = makeStyles(() => ({
@@ -34,6 +34,7 @@ const PlaceOrder = () => {
   const { dispatchSnackbarData } = useSnackbarContext();
   const classes = useStyles();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const { control, getValues, setValue, reset, handleSubmit } = useForm({ mode: "onChange" });
 
   const [loader, setLoader] = useState(false);
@@ -44,8 +45,14 @@ const PlaceOrder = () => {
   const data1 = useWatch({ name: "address1", control: control });
 
   const proceedToCheckout = async (data) => {
-    navigate(`/${routes.cart}/payment-option`, { state: { ...data } });
+    navigate(`../${routes.cart}/payment-option`, { state: { billingInformation: { ...data }, orders: products, subTotal: state?.subTotal, total: state?.total }, replace: true });
   };
+
+  useEffect(() => {
+    if (!state?.total && typeof state?.total !== "number" && state?.total <= 0) {
+      navigate(-1);
+    }
+  }, [state?.total, navigate]);
 
   useEffect(() => {
     const getProfileData = async () => {
@@ -81,8 +88,11 @@ const PlaceOrder = () => {
             const productData = products[j];
             if (orderData?.product === productData?.info?.id) {
               carts.push({
+                orderInfo: orderData?.info,
+                productInfo: productData?.info,
+                quantity: orderData?.quantity,
                 name: productData?.product?.name,
-                price: `₹${productData?.product?.price?.newprice}`,
+                price: `₹${parseInt(productData?.product?.price?.newprice) * parseInt(orderData?.quantity)}`,
                 image: productData?.product?.image[0],
               });
             }
@@ -361,15 +371,15 @@ const PlaceOrder = () => {
               <Grid container>
                 <Grid item md={8}>
                   <h4 style={{ fontWeight: "300" }}>Subtotal</h4>
-                  <h4 style={{ fontWeight: "300" }}>Subtotal</h4>
-                  <h4 style={{ fontWeight: "300" }}>Subtotal</h4>
-                  <h4 style={{ fontWeight: "300" }}>Subtotal</h4>
+                  <h4 style={{ fontWeight: "300" }}>Shipping</h4>
+                  <h4 style={{ fontWeight: "300" }}>Discount</h4>
+                  <h4 style={{ fontWeight: "300" }}>Tax</h4>
                 </Grid>
                 <Grid item md={4} sx={{ textAlign: "end" }}>
-                  <h4>₹70</h4>
+                  <h4>{state?.subTotal || 0}</h4>
                   <h4>free</h4>
-                  <h4>₹24</h4>
-                  <h4>₹94</h4>
+                  <h4>0</h4>
+                  <h4>0</h4>
                 </Grid>
               </Grid>
               <Divider />
@@ -378,7 +388,7 @@ const PlaceOrder = () => {
                   <h4>Total</h4>
                 </Grid>
                 <Grid item md={4} sx={{ textAlign: "end" }}>
-                  <h4>₹94</h4>
+                  <h4>{state?.total || 0}</h4>
                 </Grid>
               </Grid>
               <Button type="submit" variant="contained" fullWidth style={{ margin: "20px 0px" }}>

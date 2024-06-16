@@ -35,7 +35,7 @@ import { addData, getDocument } from "../../utils/services";
 import Loader from "../../components/Loader";
 import { useAuthContext } from "../../context/AuthProvider";
 import { useSnackbarContext } from "../../context/SnackbarProvider";
-import { collections } from "../../firebase/configs";
+import { ORDER_STATUS, collections } from "../../firebase/configs";
 
 const useStyles = makeStyles((theme) => ({
   selected: {
@@ -111,8 +111,8 @@ const ProductDetails = () => {
   const { authData, dispatchAuthData } = useAuthContext();
   const { dispatchSnackbarData } = useSnackbarContext();
 
-  const [product, setProduct] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [product, setProduct] = useState();
+  const [selectedImage, setSelectedImage] = useState("");
   const [count, setCount] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [loader, setLoader] = useState(false);
@@ -199,7 +199,7 @@ const ProductDetails = () => {
       dispatchAuthData({ action: "LOGIN_MODAL" });
     } else {
       setLoader(true);
-      addData(collections.ORDERS, { product: "n2GYrFgiKlHTKt0k4Cak", quantity: count }, authData?.userData?.uid)
+      addData(collections.ORDERS, { product: "ehL0QwePBC9mQy8wgbmj", quantity: count, status: ORDER_STATUS.ADDED }, authData?.userData?.uid)
         .then(() => {
           dispatchAuthData({ action: "CART_TRIGGER" });
           dispatchSnackbarData({ action: "UPDATE", payload: { message: "Order added to cart!", severity: "success", open: true } });
@@ -212,7 +212,7 @@ const ProductDetails = () => {
   };
 
   useEffect(() => {
-    const documentId = "n2GYrFgiKlHTKt0k4Cak";
+    const documentId = "ehL0QwePBC9mQy8wgbmj";
     getDocument(collections.PRODUCTS, documentId)
       .then((res) => {
         setProduct(res);

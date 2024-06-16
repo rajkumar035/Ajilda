@@ -56,13 +56,21 @@ function App() {
                   <Route caseSensitive path={routes.faq} element={<Faq />} />
                   <Route caseSensitive path={routes.product} element={<Products />} />
                   <Route caseSensitive path={`/${routes.productDetails}/:product_id`} element={<ProductDetails />} />
-                  <Route caseSensitive path={routes.response} element={<Response />} />
                   <Route caseSensitive path={routes.notFound} element={<NotFound />} />
+                  <Route
+                    caseSensitive
+                    path={routes.response}
+                    element={
+                      <ProtectedRoute>
+                        <Response />
+                      </ProtectedRoute>
+                    }
+                  />
                   <Route
                     caseSensitive
                     path={routes.Admin}
                     element={
-                      <ProtectedRoute>
+                      <ProtectedRoute role={"ADMIN"}>
                         <Admin />
                       </ProtectedRoute>
                     }

@@ -45,7 +45,7 @@ const Response = () => {
         </Box>
         <Button
           onClick={() => {
-            navigate(`/${routes.product}`);
+            navigate(`../${routes.product}`, {replace: true});
           }}
           variant='contained'
           color='primary'

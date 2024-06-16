@@ -4,17 +4,20 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import EastIcon from "@mui/icons-material/East";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { deleteData, getData } from "../../utils/services";
 import { collections } from "../../firebase/configs";
 import { useAuthContext } from "../../context/AuthProvider";
 import Loader from "../../components/Loader";
+import routes from "../../utils/routes.json";
 
 const Cart = () => {
   const {
     authData: { userData, cartData },
     dispatchAuthData,
   } = useAuthContext();
+  const navigate = useNavigate();
+
   const [cartItems, setCartItems] = useState([]);
   const [loader, setLoader] = useState(false);
   const [trigger, setTrigger] = useState(0);
@@ -22,9 +25,13 @@ const Cart = () => {
   const [couponApplied, setCouponApplied] = useState(false);
 
   const handleDelete = async (data) => {
-    await deleteData(data.uid, data.id);
-    dispatchAuthData({ action: "CART_TRIGGER" });
-    setTrigger(trigger + 1);
+    if (userData?.uid) {
+      await deleteData(collections.ORDERS, data.id, userData?.uid);
+      dispatchAuthData({ action: "CART_TRIGGER" });
+      setTrigger(trigger + 1);
+    } else {
+      dispatchAuthData({ action: "SIGN_OUT" });
+    }
   };
 
   const handleQuantityChange = (index, operation) => {
@@ -87,9 +94,7 @@ const Cart = () => {
   };
 
   const calculateDiscount = () => {
-    return cartItems.reduce((total, item) => {
-      return total + (parseFloat(item.discountedPrice.replace("₹", "")) - parseFloat(item.price.replace("₹", ""))) * item.quantity;
-    }, 0);
+    return 0;
   };
 
   const subtotal = calculateSubtotal();
@@ -259,12 +264,17 @@ const Cart = () => {
                   <h4>₹{total.toFixed(2)}</h4>
                 </Grid>
               </Grid>
-              <Link to={`/cart/place-order`} style={{ textDecoration: "none" }}>
-                <Button variant="contained" fullWidth style={{ margin: "20px 0px" }}>
-                  Proceed to checkout &nbsp;
-                  <EastIcon />
-                </Button>
-              </Link>
+              <Button
+                variant="contained"
+                fullWidth
+                style={{ margin: "20px 0px" }}
+                onClick={() => {
+                  navigate(`/${routes.cart}/place-order`, { state: { subTotal: subtotal.toFixed(2), total: total.toFixed(2) } });
+                }}
+              >
+                Proceed to checkout &nbsp;
+                <EastIcon />
+              </Button>
             </div>
           </div>
         </Grid>
