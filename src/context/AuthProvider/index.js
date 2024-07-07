@@ -1,5 +1,16 @@
-import React, { createContext, useContext, useEffect, useReducer, useState } from "react";
-import { CONSTANTS, ORDER_STATUS, auth, collections } from "../../firebase/configs";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import {
+  CONSTANTS,
+  ORDER_STATUS,
+  auth,
+  collections,
+} from "../../firebase/configs";
 import { AES } from "crypto-js";
 import { getData } from "../../utils/services";
 
@@ -24,7 +35,10 @@ const handleAuthContext = (state, data) => {
       return { ...state, loginModal: !state.loginModal };
     case "UPDATE":
       if (data?.payload?.userData) {
-        const encryptedData = AES.encrypt(JSON.stringify(data.payload.userData), CONSTANTS.DATA_ENCRYPTION_KEY).toString();
+        const encryptedData = AES.encrypt(
+          JSON.stringify(data.payload.userData),
+          CONSTANTS.DATA_ENCRYPTION_KEY
+        ).toString();
         localStorage.setItem("_user", encryptedData);
       }
       return { ...state, ...data?.payload };
@@ -33,13 +47,18 @@ const handleAuthContext = (state, data) => {
     case "SIGN_OUT":
       localStorage.clear();
       return initalState;
+    case "CARTDATA_UPDATE":
+      return { ...state, cartData: [...data?.payload] };
     default:
       return state;
   }
 };
 
 const AuthProvider = ({ children }) => {
-  const [authData, dispatchAuthData] = useReducer(handleAuthContext, initalState);
+  const [authData, dispatchAuthData] = useReducer(
+    handleAuthContext,
+    initalState
+  );
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
@@ -50,16 +69,30 @@ const AuthProvider = ({ children }) => {
         // Customizing the same UID for 2 different login's
         const userData = await getData(collections.USERLIST);
         const getPhoneMatch = userData.find((items) => {
-          return items.phoneNumber?.replace(/\s+/g, "") === res.phoneNumber?.replace(/\s+/g, "");
+          return (
+            items.phoneNumber?.replace(/\s+/g, "") ===
+            res.phoneNumber?.replace(/\s+/g, "")
+          );
         });
         const getEmailMatch = userData.find((items) => {
           return items?.email === res?.email;
         });
-        const role = getPhoneMatch ? getPhoneMatch.role : getEmailMatch ? getEmailMatch.role : null;
-        const uid = getPhoneMatch ? getPhoneMatch.uid : getEmailMatch ? getEmailMatch.uid : customAuthLogin.uid;
+        const role = getPhoneMatch
+          ? getPhoneMatch.role
+          : getEmailMatch
+          ? getEmailMatch.role
+          : null;
+        const uid = getPhoneMatch
+          ? getPhoneMatch.uid
+          : getEmailMatch
+          ? getEmailMatch.uid
+          : customAuthLogin.uid;
         customAuthLogin["uid"] = uid;
         customAuthLogin["role"] = role;
-        dispatchAuthData({ action: "UPDATE", payload: { userData: customAuthLogin, loginModal: false } });
+        dispatchAuthData({
+          action: "UPDATE",
+          payload: { userData: customAuthLogin, loginModal: false },
+        });
       } else {
         dispatchAuthData({ action: "SIGN_OUT" });
       }
@@ -90,7 +123,11 @@ const AuthProvider = ({ children }) => {
     getCartData();
   }, [authData.userData?.uid, authData.cartTrigger]);
 
-  return <AuthContext.Provider value={{ authData, dispatchAuthData }}>{!loader ? children : null}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ authData, dispatchAuthData }}>
+      {!loader ? children : null}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

@@ -92,7 +92,7 @@ const PlaceOrder = () => {
                 productInfo: productData?.info,
                 quantity: orderData?.quantity,
                 name: productData?.product?.name,
-                price: `₹${parseInt(productData?.product?.price?.newprice) * parseInt(orderData?.quantity)}`,
+                price: parseInt(productData?.product?.price?.newprice) * parseInt(orderData?.quantity),
                 image: productData?.product?.image[0],
               });
             }

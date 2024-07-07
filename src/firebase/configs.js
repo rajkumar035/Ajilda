@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBILr0jqRhQaFZ2AeEi78hvfNW3GswNRbI",
@@ -18,6 +19,7 @@ export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 export const razorpay_key = "rzp_test_Iq80oNPkKZdSS5";
+export const storageBucket = getStorage(app);
 
 export const collections = {
   CART: "cart",
@@ -35,6 +37,7 @@ export const ORDER_STATUS = {
   DISPATCHED: "dispatched",
   CANCELLED: "cancelled",
   DELIVERED: "delivered",
+  EXCHANGE: "exchange"
 };
 
 export const ROLES = {

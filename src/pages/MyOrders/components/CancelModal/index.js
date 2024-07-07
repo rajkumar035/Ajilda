@@ -18,7 +18,12 @@ const CancelModal = (props) => {
   const { dispatchSnackbarData } = useSnackbarContext();
   const classes = useStyles();
   const navigate = useNavigate();
-  const reason = ["Found this product at a better price", "Item no longer needed", "Ordered by mistake", "Delivery taking too long"];
+  const reason = [
+    "Found this product at a better price",
+    "Item no longer needed",
+    "Ordered by mistake",
+    "Delivery taking too long",
+  ];
 
   const cancelOrder = async (reason) => {
     if (userData?.uid) {
@@ -31,10 +36,30 @@ const CancelModal = (props) => {
         reason: reason,
       };
       try {
-        await updateData(collections.ORDERS, customData, customData.info.id, userData?.uid);
-        navigate(`../${routes.response}?message=${encodeURIComponent("Order Cancelled")}&desc=${encodeURIComponent("Any amount withdrawn will be debited to your account within 3 business days.")}`, { replace: true });
+        await updateData(
+          collections.ORDERS,
+          customData,
+          customData.info.id,
+          userData?.uid
+        );
+        dispatchAuthData({ action: "CART_TRIGGER" });
+        navigate(
+          `../${routes.response}?message=${encodeURIComponent(
+            "Order Cancelled"
+          )}&desc=${encodeURIComponent(
+            "Any amount withdrawn will be debited to your account within 3 business days."
+          )}`,
+          { replace: true }
+        );
       } catch (err) {
-        dispatchSnackbarData({ action: "UPDATE", payload: { message: "Something went wrong!", severity: "error", open: true } });
+        dispatchSnackbarData({
+          action: "UPDATE",
+          payload: {
+            message: "Something went wrong!",
+            severity: "error",
+            open: true,
+          },
+        });
       }
     } else {
       dispatchAuthData({ action: "SIGN_OUT" });
@@ -45,7 +70,11 @@ const CancelModal = (props) => {
     <>
       <Box component={"div"} className={classes.flexColumn} gap={"24px"}>
         <Box component={"div"} className={classes.flexColumn} gap={"12px"}>
-          <Typography variant="largeExtraBold" component={"h6"} color={"#0F1405"}>
+          <Typography
+            variant="largeExtraBold"
+            component={"h6"}
+            color={"#0F1405"}
+          >
             Reason for cancellation
           </Typography>
           <Typography variant="smallThin" component={"h6"} color={"#676C5A"}>
@@ -55,8 +84,22 @@ const CancelModal = (props) => {
         <Box component={"div"} className={classes.flexColumn} width={"100%"}>
           {reason.map((items, index) => {
             return (
-              <Box sx={{ cursor: "pointer" }} component={"div"} padding={"10px 0px"} className={classes.flexCenter} justifyContent={"space-between"} borderBottom={reason.length === index + 1 ? "none" : "1px solid #E8E8E8"} key={index}>
-                <Typography variant="mediumThin" component={"h6"} color={"#0F1405"}>
+              <Box
+                sx={{ cursor: "pointer" }}
+                component={"div"}
+                padding={"10px 0px"}
+                className={classes.flexCenter}
+                justifyContent={"space-between"}
+                borderBottom={
+                  reason.length === index + 1 ? "none" : "1px solid #E8E8E8"
+                }
+                key={index}
+              >
+                <Typography
+                  variant="mediumThin"
+                  component={"h6"}
+                  color={"#0F1405"}
+                >
                   {items}
                 </Typography>
                 <IconButton

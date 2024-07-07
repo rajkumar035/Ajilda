@@ -4,11 +4,13 @@ import React from 'react';
 
 const useStyles = makeStyles(() => ({
   loaderContainer: {
-    height: '82vh',
+    height: '100%',
     width: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    position: "absolute",
+    zIndex: "999999999999999999999999999",
     background: 'rgba(0, 0, 0, 0.4)',
   },
 }));

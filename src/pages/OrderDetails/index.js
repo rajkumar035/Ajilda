@@ -106,8 +106,10 @@ const OrderDetails = () => {
   useEffect(() => {
     const getCartDetails = async () => {
       const data = await getDocument(collections.CART, state.data.cartId, userData.uid);
+      console.log(data, "56y56y");
       setCartData(data);
     };
+    console.log(state.data , userData?.uid, "56y56y");
     if (state.data?.cartId && userData?.uid) {
       getCartDetails();
     }

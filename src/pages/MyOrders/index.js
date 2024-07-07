@@ -40,7 +40,7 @@ export const MyOrdersComponent = () => {
     };
 
     getProductsData();
-  }, []);
+  }, [tabState]);
 
   useEffect(() => {
     const setStatus = {
@@ -55,7 +55,14 @@ export const MyOrdersComponent = () => {
             return products.info.id === items.product;
           });
           items["productDetails"] = getProducts;
-          return items.status === setStatus[tabState];
+          if (
+            items.status === ORDER_STATUS.EXCHANGE &&
+            setStatus[tabState] === ORDER_STATUS.DELIVERED
+          ) {
+            return items;
+          } else {
+            return items.status === setStatus[tabState];
+          }
         })
       );
     }
@@ -71,13 +78,32 @@ export const MyOrdersComponent = () => {
             handleTabState(v);
           }}
         >
-          <Tab className={classes.tabs} label={tabStateLabel[0]} {...a11yProps(0)} />
-          <Tab className={classes.tabs} label={tabStateLabel[1]} {...a11yProps(1)} />
-          <Tab className={classes.tabs} label={tabStateLabel[2]} {...a11yProps(2)} />
+          <Tab
+            className={classes.tabs}
+            label={tabStateLabel[0]}
+            {...a11yProps(0)}
+          />
+          <Tab
+            className={classes.tabs}
+            label={tabStateLabel[1]}
+            {...a11yProps(1)}
+          />
+          <Tab
+            className={classes.tabs}
+            label={tabStateLabel[2]}
+            {...a11yProps(2)}
+          />
         </Tabs>
         <Box component={"div"}>
           {ordersData.map((items, index) => {
-            return <OrderCards mode={tabStateLabel[tabState]} navigateState={tabState !== 2} key={index} data={items} />;
+            return (
+              <OrderCards
+                mode={tabStateLabel[tabState]}
+                navigateState={tabState !== 2}
+                key={index}
+                data={items}
+              />
+            );
           })}
         </Box>
       </Box>

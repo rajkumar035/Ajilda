@@ -199,6 +199,7 @@ const ProductDetails = () => {
       dispatchAuthData({ action: "LOGIN_MODAL" });
     } else {
       setLoader(true);
+      debugger
       addData(collections.ORDERS, { product: "ehL0QwePBC9mQy8wgbmj", quantity: count, status: ORDER_STATUS.ADDED }, authData?.userData?.uid)
         .then(() => {
           dispatchAuthData({ action: "CART_TRIGGER" });

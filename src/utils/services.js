@@ -1,6 +1,15 @@
 import moment from "moment";
-import { collections, db } from "../firebase/configs";
-import { getDocs, collection, getDoc, doc, addDoc, deleteDoc, updateDoc } from "firebase/firestore";
+import { collections, db, storageBucket } from "../firebase/configs";
+import {
+  getDocs,
+  collection,
+  getDoc,
+  doc,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export const getData = async (table, userId) => {
   let collectionRef = collection(db, table);
@@ -32,7 +41,9 @@ export const getDocument = async (table, documentId, userId) => {
 
   try {
     const data = await getDoc(documentRef);
-    return data.data() ? { ...data.data(), info: { id: data.id, table: table } } : null;
+    return data.data()
+      ? { ...data.data(), info: { id: data.id, table: table } }
+      : null;
   } catch (err) {
     return err;
   }
@@ -48,7 +59,10 @@ export const addData = async (table, data, userId) => {
   }
 
   try {
-    const response = await addDoc(dataRef, { ...data, createdAt: moment().utc().format() });
+    const response = await addDoc(dataRef, {
+      ...data,
+      createdAt: moment().utc().format(),
+    });
     return response;
   } catch (err) {
     return err;
@@ -84,5 +98,16 @@ export const deleteData = async (table, docId, userId) => {
     await deleteDoc(dataRef);
   } catch (err) {
     return err;
+  }
+};
+
+export const getFileURL = async (file, folder) => {
+  try {
+    const uniqueID = Date.now() + Math.floor(Math.random()).toString();
+    const fileRef = ref(storageBucket, `/${folder}/${uniqueID}${file.name}`);
+    await uploadBytes(fileRef, file);
+    return await getDownloadURL(fileRef);
+  } catch (err) {
+    return `Failed to Generate URL and ${err}`;
   }
 };

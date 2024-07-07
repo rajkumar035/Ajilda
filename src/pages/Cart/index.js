@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, IconButton, Typography, TextField, Button, Divider } from "@mui/material";
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+} from "@mui/material";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -43,7 +56,7 @@ const Cart = () => {
       item.quantity -= 1;
     }
     newCartItems[index] = item;
-    setCartItems(newCartItems);
+    dispatchAuthData({ action: "CARTDATA_UPDATE", payload: newCartItems });
   };
 
   const handleApplyCoupon = () => {
@@ -70,7 +83,8 @@ const Cart = () => {
             if (orderData?.product === productData?.info?.id) {
               carts.push({
                 ...orderData,
-                product: productData?.product?.name,
+                product: productData?.info?.id,
+                productName: productData?.product?.name,
                 quantitySize: "150ml",
                 price: `₹${productData?.product?.price?.newprice}`,
                 discountedPrice: `₹${productData?.product?.price?.oldprice}`,
@@ -150,16 +164,22 @@ const Cart = () => {
                               alignItems: "center",
                             }}
                           >
-                            <img src={item?.img} alt="product_image" width="60px" />
+                            <img
+                              src={item?.img}
+                              alt="product_image"
+                              width="60px"
+                            />
                           </Grid>
                           <Grid item md={7}>
-                            <p>{item.product}</p>
+                            <p>{item.productName}</p>
                             <p>{item.quantitySize}</p>
                           </Grid>
                         </Grid>
                       </TableCell>
                       <TableCell>
-                        <span style={{ color: "grey" }}>{item.discountedPrice}</span>
+                        <span style={{ color: "grey" }}>
+                          {item.discountedPrice}
+                        </span>
                         &nbsp;
                         <span>{item.price}</span>
                       </TableCell>
@@ -173,17 +193,31 @@ const Cart = () => {
                             width: "100px",
                           }}
                         >
-                          <IconButton onClick={() => handleQuantityChange(index, "decrement")}>
+                          <IconButton
+                            onClick={() =>
+                              handleQuantityChange(index, "decrement")
+                            }
+                          >
                             <RemoveIcon />
                           </IconButton>
                           <span>{item.quantity}</span>
-                          <IconButton onClick={() => handleQuantityChange(index, "increment")}>
+                          <IconButton
+                            onClick={() =>
+                              handleQuantityChange(index, "increment")
+                            }
+                          >
                             <AddIcon />
                           </IconButton>
                         </div>
                       </TableCell>
                       <TableCell>
-                        <Typography>₹{(parseFloat(item.price.replace("₹", "")) * item.quantity).toFixed(2)}</Typography>
+                        <Typography>
+                          ₹
+                          {(
+                            parseFloat(item.price.replace("₹", "")) *
+                            item.quantity
+                          ).toFixed(2)}
+                        </Typography>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -216,13 +250,19 @@ const Cart = () => {
                   "& .MuiInputLabel-root.Mui-focused": {
                     color: "#56642E",
                   },
-                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    borderColor: "#56642E",
-                  },
+                  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline":
+                    {
+                      borderColor: "#56642E",
+                    },
                 }}
                 fullWidth
               />
-              <Button variant="contained" fullWidth style={{ margin: "20px 0px", padding: 8 }} onClick={handleApplyCoupon}>
+              <Button
+                variant="contained"
+                fullWidth
+                style={{ margin: "20px 0px", padding: 8 }}
+                onClick={handleApplyCoupon}
+              >
                 Apply Coupon
               </Button>
             </div>
@@ -245,7 +285,9 @@ const Cart = () => {
                   <h4 style={{ fontWeight: "300" }}>Shipping</h4>
                   <h4 style={{ fontWeight: "300" }}>Discount</h4>
                   <h4 style={{ fontWeight: "300" }}>Tax</h4>
-                  {couponApplied && <h4 style={{ fontWeight: "300" }}>Coupon Discount</h4>}
+                  {couponApplied && (
+                    <h4 style={{ fontWeight: "300" }}>Coupon Discount</h4>
+                  )}
                 </Grid>
                 <Grid item md={4} sx={{ textAlign: "end" }}>
                   <h4>₹{subtotal.toFixed(2)}</h4>
@@ -269,7 +311,12 @@ const Cart = () => {
                 fullWidth
                 style={{ margin: "20px 0px" }}
                 onClick={() => {
-                  navigate(`/${routes.cart}/place-order`, { state: { subTotal: subtotal.toFixed(2), total: total.toFixed(2) } });
+                  navigate(`/${routes.cart}/place-order`, {
+                    state: {
+                      subTotal: subtotal.toFixed(2),
+                      total: total.toFixed(2),
+                    },
+                  });
                 }}
               >
                 Proceed to checkout &nbsp;
