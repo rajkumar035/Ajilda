@@ -1,14 +1,6 @@
 import moment from "moment";
 import { collections, db, storageBucket } from "../firebase/configs";
-import {
-  getDocs,
-  collection,
-  getDoc,
-  doc,
-  addDoc,
-  deleteDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { getDocs, collection, getDoc, doc, addDoc, deleteDoc, updateDoc, where, query } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export const getData = async (table, userId) => {
@@ -41,9 +33,7 @@ export const getDocument = async (table, documentId, userId) => {
 
   try {
     const data = await getDoc(documentRef);
-    return data.data()
-      ? { ...data.data(), info: { id: data.id, table: table } }
-      : null;
+    return data.data() ? { ...data.data(), info: { id: data.id, table: table } } : null;
   } catch (err) {
     return err;
   }
@@ -111,3 +101,51 @@ export const getFileURL = async (file, folder) => {
     return `Failed to Generate URL and ${err}`;
   }
 };
+export const getCustomerUsers = async () => {
+  try {
+    const userlistRef = collection(db, "userlist");
+    const q = query(userlistRef, where("role", "==", "CUSTOMER"));
+    const querySnapshot = await getDocs(q);
+    const customerUsers = querySnapshot.docs.map((doc) => {
+      return { ...doc.data(), id: doc.id };
+    });
+    return customerUsers;
+  } catch (err) {
+    console.error("Error fetching customer users: ", err);
+    return err;
+  }
+};
+
+export const getUserOrderDetails = async () => {
+  try {
+    const usersCollectionRef = collection(db, "userlist");
+    const usersSnapshot = await getDocs(usersCollectionRef);
+    let userOrderDetails = [];
+    let users = await getCustomerUsers();
+    for (const userDoc of users) {
+      const ordersCollectionRef = collection(db, "users", userDoc?.uid, "orders");
+      const ordersSnapshot = await getDocs(ordersCollectionRef);
+      for (const orderDoc of ordersSnapshot.docs) {
+        const orderId = orderDoc.id;
+        const orderData = orderDoc.data();
+        const cartId = orderData.cartId;
+        const cartDocRef = doc(db, "users", userDoc?.uid, "cart", cartId);
+        const cartDoc = await getDoc(cartDocRef);
+        if (cartDoc.exists()) {
+          const cartData = cartDoc.data();
+          userOrderDetails.push({
+            ...userDoc,
+            orderId,
+            ...orderData,
+            cartDetails: cartData,
+          });
+        }
+      }
+    }
+    return userOrderDetails;
+  } catch (err) {
+    console.error("Error fetching user order details:", err);
+    return err;
+  }
+};
+// getUserOrderDetails().then((data) => console.log(JSON.stringify(data, null, 2, "dataaaaaa")));

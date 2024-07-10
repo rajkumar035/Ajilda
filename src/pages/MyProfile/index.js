@@ -56,6 +56,7 @@ const Profile = () => {
       setLoading(true);
       if (data?.email && dirtyFields?.email) {
         const getUserData = await getData(collections.USERLIST);
+       
         const emailExists = getUserData.filter((user) => user.email === data?.email) || [];
 
         if (emailExists.length > 0) {

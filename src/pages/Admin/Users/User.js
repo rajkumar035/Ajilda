@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-
-const usersData = [
-  { name: 'Ajay Krishnan', gender: 'Male', mobile: '6382124970' },
-  { name: 'Raj Kumar', gender: 'Male', mobile: '8098312219' },
-  { name: 'Priya Sharma', gender: 'Female', mobile: '9876543210' },
-  { name: 'John Doe', gender: 'Male', mobile: '9123456780' },
-];
+import React, { useEffect, useState } from "react";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
+import { red } from "@mui/material/colors";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { getCustomerUsers } from "../../../utils/services";
 
 function stringToColor(string) {
   let hash = 0;
@@ -23,7 +17,7 @@ function stringToColor(string) {
   for (i = 0; i < string.length; i += 1) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
-  let color = '#';
+  let color = "#";
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
     color += `00${value.toString(16)}`.slice(-2);
@@ -32,27 +26,33 @@ function stringToColor(string) {
 }
 
 function stringAvatar(name) {
+  const nameParts = name.trim().split(" ");
   return {
     sx: {
       bgcolor: stringToColor(name),
     },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    children: nameParts.length > 1 
+      ? `${nameParts[0][0]}${nameParts[1][0]}`
+      : `${nameParts[0][0]}`,
   };
 }
-
 export default function Users() {
-  const [search, setSearch] = useState('');
-
+  const [search, setSearch] = useState("");
+  const [userdata, setUserdata] = useState([]);
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
-
-  const filteredUsers = usersData.filter(
+  const filteredUsers = userdata.filter(
     (user) =>
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.mobile.includes(search)
+      user.fullName.toLowerCase().includes(search.toLowerCase()) ||
+      user.phoneNumber.includes(search) ||
+      user.uid.includes(search)
   );
-
+  useEffect(() => {
+    getCustomerUsers().then((res) => {
+      setUserdata(res);
+    });
+  }, []);
   return (
     <Box sx={{ padding: 2 }}>
       <Grid container spacing={2} alignItems="center">
@@ -76,16 +76,14 @@ export default function Users() {
           <Grid item xs={12} md={3} key={index}>
             <Card sx={{ maxWidth: 345 }}>
               <CardHeader
-                avatar={
-                  <Avatar {...stringAvatar(user.name)} aria-label="recipe" />
-                }
+                avatar={<Avatar {...stringAvatar(user.fullName)} aria-label="recipe" />}
                 action={
                   <IconButton aria-label="settings">
-                    <MoreVertIcon />
+                    {/* <MoreVertIcon /> */}
                   </IconButton>
                 }
-                title={user.name}
-                subheader={`${user.gender} - ${user.mobile}`}
+                title={user.fullName}
+                subheader={`${user.gender} - ${user.phoneNumber}`}
               />
             </Card>
           </Grid>
